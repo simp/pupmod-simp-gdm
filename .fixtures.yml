@@ -1,0 +1,8 @@
+---
+fixtures:
+  symlinks:
+    xwindows: "#{source_dir}"
+    common: "#{source_dir}/../common"
+    concat: "#{source_dir}/../concat"
+    functions: "#{source_dir}/../functions"
+    stdlib: "#{source_dir}/../stdlib"

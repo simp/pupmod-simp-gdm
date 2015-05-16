@@ -1,0 +1,83 @@
+[daemon]
+<% if !@daemon_automatic_login_enable.empty? then -%>
+AutomaticLoginEnable=<%= @daemon_automatic_login_enable %>
+<% end -%>
+<% if !@daemon_automatic_login.empty? then -%>
+AutomaticLogin=<%= @daemon_automatic_login %>
+<% end -%>
+<% if !@daemon_timed_login_enable.empty? then -%>
+TimedLoginEnable=<%= @daemon_timed_login_enable %>
+<% end -%>
+<% if !@daemon_timed_login.empty? then -%>
+TimedLogin=<%= @daemon_timed_login %>
+<% end -%>
+<% if !@daemon_timed_login_delay.empty? then -%>
+TimedLoginDelay=<%= @daemon_timed_login_delay %>
+<% end -%>
+<% if !@daemon_user.empty? then -%>
+User=<%= @daemon_user %>
+<% end -%>
+<% if !@daemon_group.empty? then -%>
+Group=<%= @daemon_group %>
+<% end -%>
+
+[security]
+<% if !@security_disallow_tcp.empty? then -%>
+DisallowTCP=<%= @security_disallow_tcp %>
+<% end -%>
+
+[xdmcp]
+<% if !@xdmcp_enable.empty? then -%>
+Enable=<%= @xdmcp_enable %>
+<% end -%>
+<% if !@xdmcp_honor_indirect.empty? then -%>
+HonorIndirect=<%= @xdmcp_honor_indirect %>
+<% end -%>
+<% if !@xdmcp_max_pending.empty? then -%>
+MaxPending=<%= @xdmcp_max_pending %>
+<% end -%>
+<% if !@xdmcp_max_sessions.empty? then -%>
+MaxSessions=<%= @xdmcp_max_sessions %>
+<% end -%>
+<% if !@xdmcp_max_wait.empty? then -%>
+MaxWait=<%= @xdmcp_max_wait %>
+<% end -%>
+<% if !@xdmcp_displays_per_host.empty? then -%>
+DisplaysPerHost=<%= @xdmcp_displays_per_host %>
+<% end -%>
+<% if !@xdmcp_max_wait_indirect.empty? then -%>
+MaxWaitIndirect=<%= @xdmcp_max_wait_indirect %>
+<% end -%>
+<% if !@xdmcp_ping_interval_seconds.empty? then -%>
+PingIntervalSeconds=<%= @xdmcp_ping_interval_seconds %>
+<% end -%>
+<% if !@xdmcp_port.empty? then -%>
+Port=<%= @xdmcp_port %>
+<% end -%>
+<% if !@xdmcp_willing.empty? then -%>
+Willing=<%= @xdmcp_willing %>
+<% end -%>
+
+[greeter]
+<% if !@greeter_include.empty? then -%>
+Include=<%= @greeter_include %>
+<% end -%>
+<% if !@greeter_exclude.empty? then -%>
+Exclude=<%= @greeter_exclude %>
+<% end -%>
+<% if !@greeter_include_all.empty? then -%>
+IncludeAll=<%= @greeter_include_all %>
+<% end -%>
+
+[chooser]
+<% if !@chooser_multicast.empty? then -%>
+Multicast=<%= @chooser_multicast %>
+<% end -%>
+<% if !@chooser_multicast_addr.empty? then -%>
+Multicast_Addr=<%= @chooser_multicast_addr %>
+<% end -%>
+
+[debug]
+<% if !@debug_enable.empty? then -%>
+Enable=<%= @debug_enable %>
+<% end -%>
