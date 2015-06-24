@@ -1,8 +1,9 @@
 ---
 fixtures:
+  repositories:
+    common: "git://github.com/simp/pupmod-simp-common"
+    concat: "git://github.com/simp/pupmod-simp-concat"
+    functions: "git://github.com/simp/pupmod-simp-functions"
+    stdlib: "git://github.com/simp/puppetlabs-stdlib"
   symlinks:
     xwindows: "#{source_dir}"
-    common: "#{source_dir}/../common"
-    concat: "#{source_dir}/../concat"
-    functions: "#{source_dir}/../functions"
-    stdlib: "#{source_dir}/../stdlib"

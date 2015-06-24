@@ -42,13 +42,13 @@ class xwindows::gdm(
     exec { 'restart_gdm':
       command     => '/usr/bin/killall gdm-binary',
       refreshonly => true,
-      require => Package['gdm']
+      require     => Package['gdm']
     }
   }
   # GDM 3+ specific items here
   elsif ( versioncmp($::gdm_version, '3') >= 0 ) {
     service { ['gdm','accounts-daemon']:
-      ensure => 'running',
+      ensure  => 'running',
       require => Package['gdm']
     }
   }
