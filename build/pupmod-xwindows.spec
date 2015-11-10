@@ -1,7 +1,7 @@
 Summary: XWindows Puppet Module
 Name: pupmod-xwindows
 Version: 4.1.0
-Release: 3
+Release: 4
 License: Apache License, Version 2.0
 Group: Applications/System
 Source: %{name}-%{version}-%{release}.tar.gz
@@ -13,6 +13,7 @@ Requires: puppet >= 3.3.0
 Requires: puppetlabs-stdlib >= 4.1.0-0
 Buildarch: noarch
 Requires: simp-bootstrap >= 4.2.0
+Requires: pupmod-simplib >= 1.0.0-0
 Obsoletes: pupmod-xwindows-test
 
 Prefix:"/etc/puppet/environments/simp/modules"
@@ -58,6 +59,9 @@ fi
 # Post uninstall stuff
 
 %changelog
+* Mon Nov 09 2015 Chris Tessmer <chris.tessmer@onypoint.com> - 4.1.0-4
+- migration to simplib and simpcat (lib/ only)
+
 * Fri Jan 16 2015 Trevor Vaughan <tvaughan@onyxpoint.com> - 4.1.0-3
 - Changed puppet-server requirement to puppet
 
@@ -144,7 +148,7 @@ fi
 - Added a patch for checking the permissions on the GDM directory since having a
   strict root umask appears to mess things up.
 
-* Thu Oct 2 2009 Maintenance
+* Fri Oct 2 2009 Maintenance
 0.1-4
 - Fixed the gdm ordering issues.  GDM will now install properly and the conf
   file will get placed appropriately.
