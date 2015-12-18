@@ -46,13 +46,13 @@ define xwindows::gdm::set (
     'server-Chooser'
   ]
 
-  augeas { "gdm_set_$name":
-    incl    => '/etc/gdm/custom.conf',
-    lens    => 'Gdm.lns',
-    changes => [ "set $section/$key '$value'" ],
-    require => Package['gdm']
-  }
-
   validate_array_member($section, $valid_values)
   validate_string($key)
+
+  augeas { "gdm_set_${name}":
+    incl    => '/etc/gdm/custom.conf',
+    lens    => 'Gdm.lns',
+    changes => [ "set ${section}/${key} '${value}'" ],
+    require => Package['gdm']
+  }
 }

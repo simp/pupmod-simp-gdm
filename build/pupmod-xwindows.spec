@@ -7,7 +7,6 @@ Group: Applications/System
 Source: %{name}-%{version}-%{release}.tar.gz
 Buildroot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires: pupmod-auditd >= 4.1.0-3
-Requires: pupmod-common >= 4.1.0-5
 Requires: pupmod-iptables >= 4.1.0-3
 Requires: puppet >= 3.3.0
 Requires: puppetlabs-stdlib >= 4.1.0-0

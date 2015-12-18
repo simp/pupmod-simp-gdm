@@ -7,7 +7,7 @@ describe 'xwindows::gdm::sec' do
   }
   let(:facts){base_facts}
 
-  it { should create_class('xwindows::gdm::sec') }
+  it { is_expected.to create_class('xwindows::gdm::sec') }
 
 #  it { should contain_gconf('banner_message_enable') }
 #  it { should contain_gconf('banner_message_text') }
@@ -18,7 +18,7 @@ describe 'xwindows::gdm::sec' do
     'standard_server_priority', 'terminal_server_flex', 'terminal_server_handled'
   ]
   @set_these.each do |rule|
-    it { should contain_xwindows__gdm__set(rule) }
+    it { is_expected.to contain_xwindows__gdm__set(rule) }
   end
 
 end

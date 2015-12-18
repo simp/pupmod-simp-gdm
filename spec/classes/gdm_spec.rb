@@ -9,10 +9,10 @@ describe 'xwindows::gdm' do
 
   let(:params) { {:include_sec => true} }
 
-  it { should create_class('xwindows::gdm') }
-  it { should contain_class('xwindows::gdm::sec') }
-  it { should contain_package('gdm') }
-  it { should contain_file('/etc/sysconfig/desktop') }
-  it { should contain_exec('restart_gdm') }
+  it { is_expected.to create_class('xwindows::gdm') }
+  it { is_expected.to contain_class('xwindows::gdm::sec') }
+  it { is_expected.to contain_package('gdm') }
+  it { is_expected.to contain_file('/etc/sysconfig/desktop') }
+  it { is_expected.to contain_exec('restart_gdm') }
 
 end

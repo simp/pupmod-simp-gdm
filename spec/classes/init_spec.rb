@@ -4,10 +4,10 @@ describe 'xwindows' do
 
   let(:facts) { {:runlevel => '5'} }
 
-  it { should create_class('xwindows') }
+  it { is_expected.to create_class('xwindows') }
 
   it do
-    should contain_file('/etc/skel/.xserverrc').with({
+    is_expected.to contain_file('/etc/skel/.xserverrc').with({
       'content' => 'exec /usr/bin/Xorg -audit 4 -s 15 -auth $HOME/.Xauthorization &'
     })
   end
@@ -24,13 +24,13 @@ describe 'xwindows' do
     'liberation-serif-fonts'
   ]
   @package.each do |pkg|
-    it { should contain_package(pkg) }
+    it { is_expected.to contain_package(pkg) }
   end
 
   context 'with runlevel = 5' do
     let(:facts) { {:runlevel => '4'} }
 
-    it { should contain_exec('/sbin/telinit 5') }
+    it { is_expected.to contain_exec('/sbin/telinit 5') }
   end
 
 end
