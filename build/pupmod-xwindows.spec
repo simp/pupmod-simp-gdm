@@ -1,7 +1,7 @@
 Summary: XWindows Puppet Module
 Name: pupmod-xwindows
-Version: 4.1.0
-Release: 4
+Version: 4.1.1
+Release: 0
 License: Apache License, Version 2.0
 Group: Applications/System
 Source: %{name}-%{version}-%{release}.tar.gz
@@ -58,6 +58,9 @@ fi
 # Post uninstall stuff
 
 %changelog
+* Thu Jun 09 2016 Nick Markowski <nmarkowski@keywcorp.com> - 4.1.1-0
+- Moved the gdm_version fact to simplib.
+
 * Mon Nov 09 2015 Chris Tessmer <chris.tessmer@onypoint.com> - 4.1.0-4
 - migration to simplib and simpcat (lib/ only)
 
