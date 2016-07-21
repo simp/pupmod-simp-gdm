@@ -1,0 +1,5 @@
+Requires: pupmod-auditd >= 4.1.0-3
+Requires: pupmod-iptables >= 4.1.0-3
+Requires: pupmod-simplib >= 1.0.0-0
+Requires: puppetlabs-stdlib >= 4.1.0-0
+Obsoletes: pupmod-xwindows-test >= 0.0.1
