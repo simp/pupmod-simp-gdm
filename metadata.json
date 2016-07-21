@@ -10,19 +10,19 @@
   "tags": [ "simp", "xwindows" ],
   "dependencies": [
     {
-      "name": "simp-auditd",
+      "name": "simp/auditd",
       "version_requirement": ">= 4.1.0"
     },
     {
-      "name": "simp-iptables",
+      "name": "simp/iptables",
       "version_requirement": ">= 4.1.0"
     },
     {
-      "name": "simp-simplib",
+      "name": "simp/simplib",
       "version_requirement": ">= 1.0.0"
     },
     {
-      "name": "puppetlabs-stdlib",
+      "name": "puppetlabs/stdlib",
       "version_requirement": ">= 4.1.0"
     }
   ],

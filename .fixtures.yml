@@ -1,10 +1,10 @@
 ---
 fixtures:
   repositories:
-    common: "git://github.com/simp/pupmod-simp-common"
-    simplib: "git://github.com/simp/pupmod-simp-simplib"
-    simpcat: "git://github.com/simp/pupmod-simp-concat"
-    functions: "git://github.com/simp/pupmod-simp-functions"
-    stdlib: "git://github.com/simp/puppetlabs-stdlib"
+    simpcat: "https://github.com/simp/pupmod-simp-simpcat"
+    simplib: "https://github.com/simp/pupmod-simp-simplib"
+    stdlib:
+      repo: "https://github.com/simp/puppetlabs-stdlib"
+      branch: "simp-master"
   symlinks:
     xwindows: "#{source_dir}"

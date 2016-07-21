@@ -1,0 +1,3 @@
+Requires: pupmod-simp-auditd >= 4.1.0-3
+Requires: pupmod-simp-iptables >= 4.1.0-3
+Obsoletes: pupmod-xwindows-test >= 0.0.1
