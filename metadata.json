@@ -1,29 +1,28 @@
 {
-  "name":    "simp-xwindows",
+  "name": "simp-xwindows",
   "version": "4.1.1",
-  "author":  "simp",
+  "author": "simp",
   "summary": "manages a basic XOrg server as well as GDM",
   "license": "Apache-2.0",
-  "source":  "https://github.com/simp/pupmod-simp-xwindows",
+  "source": "https://github.com/simp/pupmod-simp-xwindows",
   "project_page": "https://github.com/simp/pupmod-simp-xwindows",
-  "issues_url":   "https://simp-project.atlassian.net",
-  "tags": [ "simp", "xwindows" ],
+  "issues_url": "https://simp-project.atlassian.net",
+  "tags": [
+    "simp",
+    "xwindows"
+  ],
   "dependencies": [
     {
       "name": "simp/auditd",
-      "version_requirement": ">= 4.1.0"
-    },
-    {
-      "name": "simp/iptables",
-      "version_requirement": ">= 4.1.0"
+      "version_requirement": ">= 5.1.0 < 6.0.0"
     },
     {
       "name": "simp/simplib",
-      "version_requirement": ">= 1.0.0"
+      "version_requirement": ">= 1.3.1 < 2.0.0"
     },
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 4.1.0"
+      "version_requirement": ">= 4.9.0 < 5.0.0"
     }
   ],
   "operatingsystem_support": [
