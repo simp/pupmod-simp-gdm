@@ -7,32 +7,6 @@
 # * Trevor Vaughan <tvaughan@onyxpoint.com>
 #
 class xwindows::gdm::sec {
-  # Enable the GDM banner.
-#  gconf { 'banner_message_enable':
-#    value   => true,
-#    type    => 'bool',
-#    schema  => 'mandatory',
-#    require => Package['gdm']
-#  }
-
-  # Set the text for the GDM banner from /etc/issue.
-#  gconf { 'banner_message_text':
-#    value         => '/etc/issue',
-#    type          => 'string',
-#    source        => 'file',
-#    schema        => 'mandatory',
-#    clean_source  => 'gui',
-#    require       => Package['gdm']
-#  }
-
-  # Disable the GDM user list.
-#  gconf { 'disable_user_list':
-#    value   => true,
-#    type    => 'bool',
-#    schema  => 'mandatory',
-#    require => Package['gdm']
-#  }
-
   if ( versioncmp($::gdm_version, '3') < 0 ) and ( versioncmp($::gdm_version, '0.0.0') > 0 ) {
     # Disable the Chooser
     xwindows::gdm::set { 'daemon_chooser':
