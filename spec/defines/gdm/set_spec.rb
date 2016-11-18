@@ -10,7 +10,7 @@ describe 'xwindows::gdm::set' do
     is_expected.to contain_augeas('gdm_set_daemon_chooser').with({
       'incl'    => '/etc/gdm/custom.conf',
       'lens'    => 'Gdm.lns',
-      'changes' => "set daemon/Chooser 'false'",
+      'changes' => ["set daemon/Chooser 'false'"],
       'require' => 'Package[gdm]'
     })
   end

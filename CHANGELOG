@@ -1,3 +1,6 @@
+* Mon Nov 21 2016 Chris Tessmer <chris.tessmer@onyxpoint.com> - 4.1.4-0
+- Minor cleanup
+
 * Wed Nov 16 2016 Liz Nemsick <lnemsick.simp@gmail.com> - 4.1.3-0
 - Removed OBE iptables dependency
 
