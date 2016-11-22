@@ -1,3 +1,8 @@
+* Tue Nov 22 2016 Liz Nemsick <lnemsick.simp@gmail.com> - 5.0.0-0
+- Update version to reflect SIMP6 dependencies
+- Update auditd dependency for SIMP6
+- Minor cleanup
+
 * Mon Nov 21 2016 Chris Tessmer <chris.tessmer@onyxpoint.com> - 4.1.4-0
 - Minor cleanup
 
