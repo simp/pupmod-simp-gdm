@@ -1,4 +1,4 @@
-# == Define: xwindows::gdm::set
+# == Define: gdm::set
 #
 # This define allows you to set individual configuration elements in
 # /etc/gdm/custom.conf without explicitly needing to specify all of the augeas
@@ -26,7 +26,7 @@
 #
 # * Trevor Vaughan <tvaughan@onyxpoint.com>
 #
-define xwindows::gdm::set (
+define gdm::set (
   $section,
   $key,
   $value
