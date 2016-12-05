@@ -1,10 +1,6 @@
-# == Class: gdm::sec
-#
 # Some default tweaks for securing GDM.
 #
-# == Authors
-#
-# * Trevor Vaughan <tvaughan@onyxpoint.com>
+# @author Trevor Vaughan <tvaughan@onyxpoint.com>
 #
 class gdm::sec {
   if ( versioncmp($::gdm_version, '3') < 0 ) and ( versioncmp($::gdm_version, '0.0.0') > 0 ) {

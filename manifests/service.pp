@@ -1,9 +1,7 @@
-# == Class gdm::service
+# Ensures the GDM service is up and running
 #
-# == Authors
-#
-# * Trevor Vaughan <tvaughan@onyxpoint.com>
-# * Nick Markowski <nmarkowski@keywcorp.com>
+# @author Trevor Vaughan <tvaughan@onyxpoint.com>
+# @author Nick Markowski <nmarkowski@keywcorp.com>
 #
 class gdm::service {
 

@@ -1,3 +1,7 @@
+# Provides default values for parameters
+#
+# @return Undef
+#
 function gdm::data() {
 
   $common_packages = [

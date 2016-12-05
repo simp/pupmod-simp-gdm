@@ -1,17 +1,10 @@
-# == Class: gdm
-#
 # This class configures, installs, and ensures GDM is running.
 #
-# == Parameters
-#
-# [*include_sec*]
-# Boolean
+# @param include_sec Boolean
 # Whether or not to include gdm::sec
 #
-# == Authors
-#
-# * Trevor Vaughan <tvaughan@onyxpoint.com>
-# * Nick Markowski <nmarkowski@keywcorp.com>
+# @author Trevor Vaughan <tvaughan@onyxpoint.com>
+# @author Nick Markowski <nmarkowski@keywcorp.com>
 #
 class gdm (
   # Default values are in gdm/functions/data.pp
