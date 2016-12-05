@@ -1,91 +1,41 @@
-# == Class: xwindows
+# This class configures, installs, and ensures GDM is running.
 #
-# This class sets up xwindows.
+# @param include_sec Boolean
+# Whether or not to include gdm::sec
 #
-# == Authors
+# @author Trevor Vaughan <tvaughan@onyxpoint.com>
+# @author Nick Markowski <nmarkowski@keywcorp.com>
 #
-# * Trevor Vaughan <tvaughan@onyxpoint.com>
-#
-class xwindows {
-  if ( versioncmp($::operatingsystemmajrelease, '6') > 0 ) {
-    $x_package_list = [
-      'xorg-x11-drivers',
-      'xorg-x11-xinit',
-      'xorg-x11-utils',
-      'xorg-x11-docs',
-    ]
+class gdm (
+  # Default values are in gdm/functions/data.pp
+  $include_sec
+) {
+  validate_bool($include_sec)
 
-    $additional_packages = [
-      'dejavu-sans-fonts',
-      'dejavu-sans-mono-fonts',
-      'dejavu-serif-fonts',
-      'bitmap-fixed-fonts',
-      'bitmap-lucida-typewriter-fonts',
-      'liberation-mono-fonts',
-      'liberation-sans-fonts',
-      'liberation-serif-fonts'
-    ]
-  } else {
-    file { '/etc/skel/.xserverrc':
+  include '::gdm::install'
+  include '::gdm::service'
+  if $include_sec {
+    include '::gdm::sec'
+  }
+
+  if ( versioncmp($::gdm_version, '3') < 0 ) and ( versioncmp($::gdm_version, '0.0.0') > 0 ) {
+    # Set the desktop variable
+    file { '/etc/sysconfig/desktop':
       owner   => 'root',
       group   => 'root',
-      mode    => '0600',
-      content => 'exec /usr/bin/Xorg -audit 4 -s 15 -auth $HOME/.Xauthorization &'
+      mode    => '0644',
+      content => "DESKTOP='GNOME'\n"
     }
 
-    $x_package_list = [
-      'xorg-x11-apps',
-      'xorg-x11-drivers',
-      'xorg-x11-xinit',
-      'xorg-x11-twm',
-      'xterm'
-    ]
-
-    $additional_packages = [
-      'dejavu-lgc-sans-fonts',
-      'dejavu-lgc-sans-mono-fonts',
-      'dejavu-lgc-serif-fonts',
-      'dejavu-sans-fonts',
-      'dejavu-sans-mono-fonts',
-      'dejavu-serif-fonts',
-      'bitmap-console-fonts',
-      'bitmap-fangsongti-fonts',
-      'bitmap-fixed-fonts',
-      'bitmap-fonts-compat',
-      'bitmap-lucida-typewriter-fonts',
-      'bitmap-miscfixed-fonts',
-      'liberation-mono-fonts',
-      'liberation-sans-fonts',
-      'liberation-serif-fonts'
-    ]
+    # Audit the default gdm system-wide configuration file.
+    if defined('auditd') and defined(Class['auditd']) {
+      auditd::add_rules { 'system_gdm':
+        content => '-w /usr/share/gdm/defaults.conf -p wa -k CFG_sys'
+      }
+    }
   }
 
-  # Basic XOrg Stuff
-  package { $x_package_list :
-    ensure => 'latest',
-  }
-
-  # Fonts
-  package {
-    [
-      'xorg-x11-fonts-100dpi',
-      'xorg-x11-fonts-75dpi',
-      'xorg-x11-fonts-ISO8859-1-100dpi',
-      'xorg-x11-fonts-ISO8859-1-75dpi',
-      'xorg-x11-fonts-Type1',
-      'xorg-x11-fonts-misc',
-      'xorg-x11-server-Xorg'
-    ]:
-    ensure => 'latest',
-  }
-
-  package { $additional_packages :
-    ensure => 'latest'
-  }
-
-  # Kick over to runlevel 5 if we're not already there.
-  # Uses the runlevel custom fact from the 'common' module.
-  if $::runlevel != '5' {
-    exec { '/sbin/telinit 5': }
-  }
+  Class['gdm::install'] ->
+  Class['gdm::service'] ->
+  Class['gdm']
 }

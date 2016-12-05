@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'xwindows::gdm::set' do
+describe 'gdm::set' do
 
   let(:title) { 'daemon_chooser' }
 

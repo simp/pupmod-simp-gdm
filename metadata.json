@@ -1,16 +1,17 @@
 {
-  "name": "simp-xwindows",
-  "version": "5.0.0",
+  "name": "simp-gdm",
+  "version": "6.0.0",
   "author": "SIMP Team",
-  "summary": "manages a basic XOrg server as well as GDM",
+  "summary": "manages GDM",
   "license": "Apache-2.0",
-  "source": "https://github.com/simp/pupmod-simp-xwindows",
-  "project_page": "https://github.com/simp/pupmod-simp-xwindows",
+  "source": "https://github.com/simp/pupmod-simp-gdm",
+  "project_page": "https://github.com/simp/pupmod-simp-gdm",
   "issues_url": "https://simp-project.atlassian.net",
   "tags": [
     "simp",
-    "xwindows"
+    "gdm"
   ],
+  "data_provider": "function",
   "dependencies": [
     {
       "name": "simp/auditd",

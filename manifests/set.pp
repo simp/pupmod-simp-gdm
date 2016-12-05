@@ -1,5 +1,3 @@
-# == Define: xwindows::gdm::set
-#
 # This define allows you to set individual configuration elements in
 # /etc/gdm/custom.conf without explicitly needing to specify all of the augeas
 # parameters.
@@ -9,24 +7,20 @@
 # For particular configuration parameters, please see:
 #   http://projects.gnome.org/gdm/docs/2.16/configuration.html
 #
-# == Parameters
-#
-# [*section*]
+# @param section
 #   The section that you wish to manipulate.  Valid values are 'daemon',
 #   'security','xdmcp', 'gui','greeter', 'chooser', 'debug', 'servers',
 #   'server-Standard', 'server-Terminal', and 'server-Chooser'
 #
-# [*key*]
+# @param key
 #   The actual key value that you wish to change under $section.
 #
-# [*value*]
+# @param value
 #   The value to which $key should be set under $section
 #
-# == Authors
+# @author Trevor Vaughan <tvaughan@onyxpoint.com>
 #
-# * Trevor Vaughan <tvaughan@onyxpoint.com>
-#
-define xwindows::gdm::set (
+define gdm::set (
   $section,
   $key,
   $value

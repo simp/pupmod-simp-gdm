@@ -1,4 +1,6 @@
 Obsoletes: pupmod-xwindows-test >= 0.0.1
+Obsoletes: pupmod-simp-xwindows >= 5.0.0-0
+Provides: pupmod-simp-xwindows
 Requires: pupmod-puppetlabs-stdlib < 5.0.0-0
 Requires: pupmod-puppetlabs-stdlib >= 4.9.0-0
 Requires: pupmod-simp-auditd < 7.0.0-0
