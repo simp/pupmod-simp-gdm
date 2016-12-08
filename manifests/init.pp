@@ -8,7 +8,8 @@
 #
 class gdm (
   # Default values are in gdm/functions/data.pp
-  $include_sec
+  $include_sec,
+  $auditd = simplib::lookup('simp_options::auditd', { 'default_value' => false, 'value_type' => Boolean })
 ) {
   validate_bool($include_sec)
 
@@ -28,7 +29,7 @@ class gdm (
     }
 
     # Audit the default gdm system-wide configuration file.
-    if defined('auditd') and defined(Class['auditd']) {
+    if $auditd {
       auditd::add_rules { 'system_gdm':
         content => '-w /usr/share/gdm/defaults.conf -p wa -k CFG_sys'
       }

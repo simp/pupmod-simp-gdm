@@ -6,8 +6,8 @@
 class gdm::service {
 
   # Kick over to runlevel 5 if we're not already there.
-  # Uses the runlevel custom fact from the 'common' module.
-  if $::runlevel != '5' {
+  # Uses the runlevel custom fact from the 'simplib' module.
+  if $facts['runlevel'] != '5' {
     exec { '/sbin/telinit 5': }
   }
 
