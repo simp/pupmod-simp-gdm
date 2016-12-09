@@ -1,3 +1,6 @@
+* Thu Dec 08 2016 Liz Nemsick <lnemsick.simp@gmail.com> - 6.0.0-0
+- Use simp_options module for global catalysts
+
 * Fri Dec 02 2016 Nick Markowski <nmarkowski@keywcorp.com> - 6.0.0-0
 - Renamed 'xwindows' to 'gdm'
 - Refactored the module to be less fugly.
