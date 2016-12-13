@@ -31,7 +31,7 @@ function gdm::data() {
         'xorg-x11-utils',
         'xorg-x11-docs',
         $common_packages
-      ]}
+      ].flatten}
     }
     '6': {
       { 'gdm::install::package_list' => [
@@ -46,7 +46,7 @@ function gdm::data() {
         'bitmap-fonts-compat',
         'bitmap-miscfixed-fonts',
         $common_packages
-      ]}
+      ].flatten}
     }
     default: {
       {}
