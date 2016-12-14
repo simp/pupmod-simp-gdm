@@ -21,8 +21,7 @@
 # @author Trevor Vaughan <tvaughan@onyxpoint.com>
 #
 define gdm::set (
-  Enum[ 'daemon', 'security', 'xdmcp', 'gui', 'greeter', 'chooser', 'debug',
-  'servers', 'server-Standard', 'server-Terminal', 'server-Chooser' ] $section,
+  Gdm::Confsection $section,
   String $key,
   Variant[Boolean,String] $value
 ) {
