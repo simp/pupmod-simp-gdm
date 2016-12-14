@@ -8,10 +8,9 @@
 #
 class gdm (
   # Default values are in gdm/functions/data.pp
-  $include_sec,
-  $auditd = simplib::lookup('simp_options::auditd', { 'default_value' => false, 'value_type' => Boolean })
+  Boolean $include_sec,
+  Boolean $auditd = simplib::lookup('simp_options::auditd', { 'default_value' => false })
 ) {
-  validate_bool($include_sec)
 
   include '::gdm::install'
   include '::gdm::service'

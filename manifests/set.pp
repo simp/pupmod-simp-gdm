@@ -21,28 +21,10 @@
 # @author Trevor Vaughan <tvaughan@onyxpoint.com>
 #
 define gdm::set (
-  $section,
-  $key,
-  $value
+  Gdm::Confsection $section,
+  String $key,
+  Variant[Boolean,String] $value
 ) {
-
-  $valid_values = [
-    'daemon',
-    'security',
-    'xdmcp',
-    'gui',
-    'greeter',
-    'chooser',
-    'debug',
-    'servers',
-    'server-Standard',
-    'server-Terminal',
-    'server-Chooser'
-  ]
-
-  validate_array_member($section, $valid_values)
-  validate_string($key)
-
   augeas { "gdm_set_${name}":
     incl    => '/etc/gdm/custom.conf',
     lens    => 'Gdm.lns',
