@@ -29,7 +29,7 @@ class gdm (
 
     # Audit the default gdm system-wide configuration file.
     if $auditd {
-      auditd::add_rules { 'system_gdm':
+      auditd::rule { 'system_gdm':
         content => '-w /usr/share/gdm/defaults.conf -p wa -k CFG_sys'
       }
     }
