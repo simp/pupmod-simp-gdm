@@ -1,0 +1,23 @@
+HOSTS:
+  centos7:
+    roles:
+      - server
+      - default
+      - master
+      - el7
+    platform:   el-7-x86_64
+    box:        centos/7
+    hypervisor: vagrant
+
+  centos6:
+    roles:
+      - simp_server
+      - el6
+    platform:   el-6-x86_64
+    box:        centos/6
+    hypervisor: vagrant
+CONFIG:
+  log_level: verbose
+  type:      aio
+  vagrant_memsize: 256
+  # vb_gui: true

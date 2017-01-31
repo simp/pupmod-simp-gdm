@@ -4,23 +4,23 @@
 # @author Nick Markowski <nmarkowski@keywcorp.com>
 #
 class gdm::service {
-
-  # Kick over to runlevel 5 if we're not already there.
-  # Uses the runlevel custom fact from the 'simplib' module.
-  if $facts['runlevel'] != '5' {
-    exec { '/sbin/telinit 5': }
-  }
-
-  if ( versioncmp($::gdm_version, '3') < 0 ) and ( versioncmp($::gdm_version, '0.0.0') > 0 ) {
-    exec { 'restart_gdm':
-      command     => '/usr/bin/killall gdm-binary',
-      refreshonly => true,
+  if 'systemd' in $facts['init_systems'] {
+    service { ['gdm','accounts-daemon']:
+      ensure => 'running',
+      enable => true
     }
   }
-  # GDM 3+ specific items here
-  elsif ( versioncmp($::gdm_version, '3') >= 0 ) {
-    service { ['gdm','accounts-daemon']:
-      ensure  => 'running',
+  else {
+    unless $facts['runlevel'] == '5' {
+      exec { 'gdm telinit 5':
+        command     => '/sbin/telinit 5'
+      }
+    }
+    else {
+      exec { 'restart_gdm':
+        command     => '/usr/bin/killall gdm-binary',
+        refreshonly => true
+      }
     }
   }
 }

@@ -1,8 +1,8 @@
-# Provides default values for parameters
+# Provides default GDM package install list
 #
-# @return Undef
+# @return Array[String]
 #
-function gdm::data() {
+function gdm::packages() {
 
   $common_packages = [
     'gdm',
@@ -25,16 +25,12 @@ function gdm::data() {
     'liberation-serif-fonts'
   ]
 
-  $os_params = case $facts['operatingsystemmajrelease'] {
-    '7': {
-      { 'gdm::install::package_list' => [
+  $os_packages = case $facts['operatingsystemmajrelease'] {
+    '7': { [
         'xorg-x11-utils',
-        'xorg-x11-docs',
-        $common_packages
-      ].flatten}
-    }
-    '6': {
-      { 'gdm::install::package_list' => [
+        'xorg-x11-docs'
+    ] }
+    '6': { [
         'xorg-x11-apps',
         'xorg-x11-twm',
         'xterm',
@@ -44,18 +40,10 @@ function gdm::data() {
         'bitmap-console-fonts',
         'bitmap-fangsongti-fonts',
         'bitmap-fonts-compat',
-        'bitmap-miscfixed-fonts',
-        $common_packages
-      ].flatten}
-    }
-    default: {
-      {}
-    }
+        'bitmap-miscfixed-fonts'
+      ] }
+    default: {[]}
   }
 
-  $base_params = {
-    'gdm::include_sec' => true
-  }
-
-  $base_params + $os_params
+  $common_packages + $os_packages
 }
