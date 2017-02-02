@@ -5,12 +5,17 @@ describe 'gdm' do
     on_supported_os.each do |os, os_facts|
       context "on #{os}" do
 
+        it { is_expected.to compile.with_all_deps }
+        it { is_expected.to contain_class('gdm::install') }
+        it { is_expected.to contain_notify('Additional Puppet Run Needed for gdm') }
+        it { is_expected.to_not contain_class('gdm::service') }
+
         context 'EL7 with GDM = 3.0.0' do
           if os_facts[:operatingsystemmajrelease].to_s >= '7'
-            context 'default parameters, runlevel 5' do
+            context 'default parameters' do
               let(:facts){ os_facts.merge({:runlevel => '5', :gdm_version => '3.14.2'}) }
               it { is_expected.to compile.with_all_deps }
-              it { is_expected.to contain_class('gdm::install').that_comes_before('Class[gdm::service]') }
+              it { is_expected.to contain_class('gdm::install').that_notifies('Class[gdm::service]') }
               it { is_expected.to contain_class('gdm::service').that_comes_before('Class[gdm]') }
               it { is_expected.to create_class('gdm') }
               @package = [
@@ -32,21 +37,14 @@ describe 'gdm' do
               it { is_expected.to contain_service('gdm') }
               it { is_expected.to contain_service('accounts-daemon') }
             end
-
-            context 'with runlevel = 4 and auditing enabled' do
-              let(:facts) { os_facts.merge({:runlevel => '4', :gdm_version => '3.14.2'}) }
-              let(:params) {{ :auditd => true }}
-              it { is_expected.to contain_exec('/sbin/telinit 5') }
-              it { is_expected.to_not contain_auditd__rule ( 'system_gdm' ) }
-            end
           end
         end
         context 'EL6 with GDM < 3.0.0' do
           if os_facts[:operatingsystemmajrelease].to_s < '7'
-            context 'default parameters, runlevel 5' do
+            context 'default parameters' do
               let(:facts){ os_facts.merge({:runlevel => '5', :gdm_version => '2.0.0'}) }
               it { is_expected.to compile.with_all_deps }
-              it { is_expected.to contain_class('gdm::install').that_comes_before('Class[gdm::service]') }
+              it { is_expected.to contain_class('gdm::install').that_notifies('Class[gdm::service]') }
               it { is_expected.to contain_class('gdm::service').that_comes_before('Class[gdm]') }
               it { is_expected.to create_class('gdm') }
 
@@ -70,13 +68,6 @@ describe 'gdm' do
               it { is_expected.to contain_exec( 'restart_gdm' ) }
               it { is_expected.to_not contain_service('gdm') }
               it { is_expected.to_not contain_service('accounts-daemon') }
-            end
-
-            context 'with runlevel = 4 and auditing enabled' do
-              let(:facts) { os_facts.merge({:runlevel => '4', :gdm_version => '2.0.0'}) }
-              let(:params) {{ :auditd => true }}
-              it { is_expected.to contain_exec('/sbin/telinit 5') }
-              it { is_expected.to contain_auditd__rule ( 'system_gdm' ) }
             end
           end
         end

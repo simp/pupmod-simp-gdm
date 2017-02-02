@@ -3,7 +3,7 @@
 # @author Trevor Vaughan <tvaughan@onyxpoint.com>
 #
 class gdm::sec {
-  if ( versioncmp($::gdm_version, '3') < 0 ) and ( versioncmp($::gdm_version, '0.0.0') > 0 ) {
+  if ( versioncmp($facts['gdm_version'], '3') < 0 ) and ( versioncmp($facts['gdm_version'], '0.0.0') > 0 ) {
     # Disable the Chooser
     gdm::set { 'daemon_chooser':
       section => 'daemon',

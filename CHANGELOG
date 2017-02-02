@@ -1,3 +1,8 @@
+* Mon Jan 30 2017 Trevor Vaughan <tvaughan@onyxpoint.com> - 6.0.0-0
+- Added acceptance tests
+- Ensure GDM starts at boot time on EL7
+- Add notice that two runs are required
+
 * Tue Dec 13 2016 Liz Nemsick <lnemsick.simp@gmail.com> - 6.0.0-0
 - Add strong typing of parameters
 

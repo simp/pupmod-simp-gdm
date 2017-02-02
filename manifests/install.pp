@@ -1,17 +1,21 @@
 # This class installs GDM dependencies.
 #
-# @param package_list List of required packages to install GDM.
+# @param package_list
+#   List of required packages to install GDM
+#
+# @param extra_packages
+#   User defined packages to install for GDM
 #
 # @author Trevor Vaughan <tvaughan@onyxpoint.com>
 # @author Nick Markowski <nmarkowski@keywcorp.com>
 #
 class gdm::install (
-  # Default values are in gdm/functions/data.pp
-  Array[String] $package_list
+  Array[String] $package_list   = gdm::packages(),
+  Array[String] $extra_packages = []
 ){
   assert_private()
 
-  package { $package_list :
+  package { ($package_list + $extra_packages) :
     ensure => 'latest'
   }
 }
