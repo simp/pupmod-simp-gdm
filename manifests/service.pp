@@ -5,7 +5,14 @@
 #
 class gdm::service {
   if 'systemd' in $facts['init_systems'] {
-    service { ['gdm','accounts-daemon']:
+    $_services = [
+      'gdm',
+      'display-manager',
+      'accounts-daemon',
+      'upower', # replaced hal
+      'rtkit' # used by pulseaudio
+    ]
+    service { $_services:
       ensure => 'running',
       enable => true
     }
