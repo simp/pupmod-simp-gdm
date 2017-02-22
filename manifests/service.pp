@@ -10,7 +10,7 @@ class gdm::service {
       'display-manager',
       'accounts-daemon',
       'upower', # replaced hal
-      'rtkit' # used by pulseaudio
+      'rtkit-daemon' # used by pulseaudio
     ]
     service { $_services:
       ensure => 'running',
