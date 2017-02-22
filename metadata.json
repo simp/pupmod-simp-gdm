@@ -1,6 +1,6 @@
 {
   "name": "simp-gdm",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "author": "SIMP Team",
   "summary": "manages GDM",
   "license": "Apache-2.0",
@@ -9,7 +9,9 @@
   "issues_url": "https://simp-project.atlassian.net",
   "tags": [
     "simp",
-    "gdm"
+    "gdm",
+    "display-manager",
+    "display"
   ],
   "dependencies": [
     {
@@ -39,6 +41,12 @@
         "6",
         "7"
       ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": "4.6"
     }
   ]
 }
