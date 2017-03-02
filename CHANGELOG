@@ -1,3 +1,9 @@
+* Wed Feb 22 2017 Nick Miller <nick.miller@onyxpoint.com> - 7.0.1-0
+- Added the following services on EL7:
+  - `display-manager`
+  - `upower` - replaced hal, used by gnome
+  - `rtkit-daemon` - used by pulseaudio and gdm
+
 * Mon Jan 30 2017 Trevor Vaughan <tvaughan@onyxpoint.com> - 7.0.0-0
 - Changed calls to auditd to the new layout (breaking change)
 - Added acceptance tests

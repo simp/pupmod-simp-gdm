@@ -21,8 +21,8 @@
 # @author Trevor Vaughan <tvaughan@onyxpoint.com>
 #
 define gdm::set (
-  Gdm::Confsection $section,
-  String $key,
+  Gdm::Confsection        $section,
+  String                  $key,
   Variant[Boolean,String] $value
 ) {
   augeas { "gdm_set_${name}":
