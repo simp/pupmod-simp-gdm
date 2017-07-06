@@ -1,3 +1,6 @@
+* Thu Jul 06 2017 Liz Nemsick <lnemsick.simp@gmail.com> - 7.0.2-0
+- Update puppet dependency in metadata.json
+
 * Wed Feb 22 2017 Nick Miller <nick.miller@onyxpoint.com> - 7.0.1-0
 - Added the following services on EL7:
   - `display-manager`
