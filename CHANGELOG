@@ -1,3 +1,6 @@
+* Wed Jul 12 2017 Liz Nemsick <lnemsick.simp@gmail.com> - 7.0.3-0
+- Harden acceptance test
+
 * Thu Jul 06 2017 Liz Nemsick <lnemsick.simp@gmail.com> - 7.0.2-0
 - Update puppet dependency in metadata.json
 
