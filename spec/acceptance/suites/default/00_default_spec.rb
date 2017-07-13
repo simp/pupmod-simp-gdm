@@ -32,7 +32,7 @@ describe 'simp::gdm class' do
 
       it 'should be running GDM after reboot' do
         host.reboot
-        on(host, 'pgrep -u gdm')
+        retry_on(host, 'pgrep -u gdm')
       end
     end
   end
