@@ -1,6 +1,6 @@
 {
   "name": "simp-gdm",
-  "version": "7.0.2",
+  "version": "7.0.3",
   "author": "SIMP Team",
   "summary": "manages GDM",
   "license": "Apache-2.0",
