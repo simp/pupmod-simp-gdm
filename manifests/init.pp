@@ -11,6 +11,8 @@ class gdm (
   Boolean $auditd      = simplib::lookup('simp_options::auditd', { 'default_value' => false })
 ) {
 
+  simplib::assert_metadata($module_name)
+
   include '::gdm::install'
 
   # If GDM isn't installed, this won't actually exist so we need a two pass run

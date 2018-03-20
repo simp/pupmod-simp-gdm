@@ -25,6 +25,9 @@ define gdm::set (
   String                  $key,
   Variant[Boolean,String] $value
 ) {
+
+  include 'gdm::install'
+
   augeas { "gdm_set_${name}":
     incl    => '/etc/gdm/custom.conf',
     lens    => 'Gdm.lns',
