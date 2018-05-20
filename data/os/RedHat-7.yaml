@@ -1,0 +1,4 @@
+---
+gdm::packages:
+  xorg-x11-utils: ~
+  xorg-x11-docs: ~

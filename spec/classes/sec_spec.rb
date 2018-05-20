@@ -16,5 +16,4 @@ describe 'gdm::sec' do
   @set_these.each do |rule|
     it { is_expected.to contain_gdm__set(rule) }
   end
-
 end
