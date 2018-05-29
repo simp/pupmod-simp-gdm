@@ -47,7 +47,6 @@ describe 'gdm' do
               it { is_expected.to compile.with_all_deps }
               it { is_expected.to create_class('gdm') }
               it { is_expected.to contain_gnome__install('gdm packages').that_notifies('Class[gdm::service]') }
-              it { is_expected.to contain_gnome__install('gdm packages').that_comes_before('Class[gdm::config]') }
 
               @package = [
                 'gdm', 'xorg-x11-apps','xorg-x11-drivers', 'xorg-x11-xinit', 'xorg-x11-twm', 'xterm',

@@ -78,6 +78,7 @@ class gdm (
     }
     else {
       include 'gdm::config'
+
       Gnome::Install['gdm packages'] -> Class['gdm::config']
       Class['gdm::config'] ~> Class['gdm::service']
     }
