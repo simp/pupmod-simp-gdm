@@ -4,9 +4,10 @@ describe 'gdm' do
   context 'supported operating systems' do
     on_supported_os.each do |os, os_facts|
       context "on #{os}" do
+        let(:facts) { os_facts }
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_class('gdm::install') }
+        it { is_expected.to contain_gnome__install('gdm packages') }
         it { is_expected.to contain_notify('Additional Puppet Run Needed for gdm') }
         it { is_expected.to_not contain_class('gdm::service') }
 
@@ -15,9 +16,9 @@ describe 'gdm' do
             context 'default parameters' do
               let(:facts){ os_facts.merge({:runlevel => '5', :gdm_version => '3.14.2'}) }
               it { is_expected.to compile.with_all_deps }
-              it { is_expected.to contain_class('gdm::install').that_notifies('Class[gdm::service]') }
-              it { is_expected.to contain_class('gdm::service').that_comes_before('Class[gdm]') }
               it { is_expected.to create_class('gdm') }
+              it { is_expected.to contain_gnome__install('gdm packages').that_notifies('Class[gdm::service]') }
+              it { is_expected.to contain_gnome__install('gdm packages').that_comes_before('Class[gdm::config]') }
               @package = [
                 'gdm', 'xorg-x11-drivers', 'xorg-x11-xinit', 'xorg-x11-utils', 'xorg-x11-docs',
                 'dejavu-sans-fonts', 'dejavu-sans-mono-fonts', 'dejavu-serif-fonts',
@@ -44,9 +45,8 @@ describe 'gdm' do
             context 'default parameters' do
               let(:facts){ os_facts.merge({:runlevel => '5', :gdm_version => '2.0.0'}) }
               it { is_expected.to compile.with_all_deps }
-              it { is_expected.to contain_class('gdm::install').that_notifies('Class[gdm::service]') }
-              it { is_expected.to contain_class('gdm::service').that_comes_before('Class[gdm]') }
               it { is_expected.to create_class('gdm') }
+              it { is_expected.to contain_gnome__install('gdm packages').that_notifies('Class[gdm::service]') }
 
               @package = [
                 'gdm', 'xorg-x11-apps','xorg-x11-drivers', 'xorg-x11-xinit', 'xorg-x11-twm', 'xterm',
