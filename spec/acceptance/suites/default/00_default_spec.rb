@@ -6,8 +6,6 @@ describe 'simp::gdm class' do
   let(:manifest) {
     <<-EOS
       include 'gdm'
-
-      runlevel { '5': persist => true }
     EOS
   }
 
