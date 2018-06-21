@@ -21,7 +21,7 @@ class gdm::config {
   }
 
   $gdm::dconf_hash.each |String $profile_name, Hash $profiles| {
-    dconf::settings { 'GDM Dconf Settings':
+    dconf::settings { "GDM Dconf Settings for #{$profile_name}":
       profile       => $profile_name,
       settings_hash => $profiles
     }

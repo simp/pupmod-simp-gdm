@@ -34,8 +34,11 @@ describe 'gdm' do
               it { is_expected.to_not contain_file('/etc/sysconfig/desktop') }
               it { is_expected.to_not contain_auditd__rule ( 'system_gdm' ) }
               it { is_expected.to_not contain_exec( 'restart_gdm' ) }
-              it { is_expected.to contain_service('gdm') }
-              it { is_expected.to contain_service('accounts-daemon') }
+              it { is_expected.to contain_svckill__ignore('gdm') }
+              it { is_expected.to contain_svckill__ignore('display-manager') }
+              it { is_expected.to contain_svckill__ignore('accounts-daemon') }
+              it { is_expected.to contain_svckill__ignore('upower') }
+              it { is_expected.to contain_svckill__ignore('rtkit-daemon') }
             end
           end
         end
