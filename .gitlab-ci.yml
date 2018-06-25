@@ -211,3 +211,28 @@ default-fips:
   script:
     - bundle exec rake spec_clean
     - bundle exec rake beaker:suites[default]
+
+compliance:
+  stage: acceptance
+  tags:
+    - beaker
+  <<: *cache_bundler
+  <<: *setup_bundler_env
+  variables:
+    PUPPET_VERSION: '~> 4.10.0'
+  script:
+    - bundle exec rake spec_clean
+    - bundle exec rake beaker:suites[compliance]
+
+compliance-fips:
+  stage: acceptance
+  tags:
+    - beaker
+  <<: *cache_bundler
+  <<: *setup_bundler_env
+  variables:
+    PUPPET_VERSION: '~> 4.10.0'
+    BEAKER_fips: 'yes'
+  script:
+    - bundle exec rake spec_clean
+    - bundle exec rake beaker:suites[compliance]
