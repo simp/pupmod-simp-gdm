@@ -1,4 +1,7 @@
-# Ensures the GDM service is up and running
+# Ensures the GDM service is properly configured
+#
+# This will **NOT** switch the runlevel by default since this is a potentially
+# dangerous activity if graphics drivers are having issues.
 #
 # @param services
 #   A list of services relevant to the proper functioning of GDM
@@ -25,8 +28,6 @@ class gdm::service (
         }
       }
     }
-
-    runlevel { 'graphical': }
   }
 
   if $services and simplib::module_exist('svckill') {

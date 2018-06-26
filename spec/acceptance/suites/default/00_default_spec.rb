@@ -6,6 +6,8 @@ describe 'simp::gdm class' do
   let(:manifest) {
     <<-EOS
       include 'gdm'
+
+      runlevel { 'graphical': }
     EOS
   }
 
