@@ -15,6 +15,10 @@
   ],
   "dependencies": [
     {
+      "name": "simp/simp_banners",
+      "version_requirement": ">= 0.1.0 < 2.0.0"
+    },
+    {
       "name": "simp/auditd",
       "version_requirement": ">= 7.0.0 < 9.0.0"
     },

@@ -20,10 +20,47 @@ class gdm::config {
     }
   }
 
-  $gdm::dconf_hash.each |String $profile_name, Hash $profiles| {
-    dconf::settings { "GDM Dconf Settings for ${profile_name}":
-      profile       => $profile_name,
-      settings_hash => $profiles
+  if $gdm::banner {
+    if $gdm::banner_content {
+      if $gdm::banner_content[0] == "'" {
+        $_banner_text = $gdm::banner_content
+      }
+      else {
+        $_banner_text = "'${gdm::banner_content}'"
+      }
     }
+    else {
+      $_tmp_text = simp_banners::fetch(
+        $gdm::simp_banner,
+        { 'cr_escape' => true }
+      )
+
+      $_banner_text = "'${_tmp_text}'"
+    }
+
+    $_banner_settings = {
+      'org/gnome/login-screen' => {
+        'banner-message-enable' => {
+          'value' => true
+        },
+        'banner-message-text' => {
+          'value' => $_banner_text
+        }
+      }
+    }
+  }
+  else {
+    $_banner_settings = {
+      'org/gnome/login-screen' => {
+        'banner-message-enable' => {
+          'value' => false
+        }
+      }
+    }
+  }
+
+  dconf::settings { 'GDM Dconf Settings':
+    profile       => 'gdm',
+    settings_hash => deep_merge($gdm::dconf_hash, $_banner_settings)
   }
 }

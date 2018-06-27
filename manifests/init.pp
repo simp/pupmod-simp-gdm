@@ -28,17 +28,38 @@
 # @param auditd
 #   Enable auditd support for this module via the ``simp-auditd`` module
 #
+# @param banner
+#   Enable a login screen banner
+#
+#   * NOTE: This will *not* take precedence over banner settings set in
+#     `dconf_hash`. If you want to set them there, then you should disable this
+#     setting.
+#
+# @param simp_banner
+#   The name of a banner from the `simp_banners` module that should be used
+#
+#   * Has no effect if `banner` is not set
+#   * Has no effect if `banner_content` is set
+#
+# @param banner_content
+#   The full content of the banner, without alteration
+#
+#   * GDM cannot handle '\n' sequences so any banner will need to have those
+#     replaced with the literal '\n' string.
+#
 # @author https://github.com/simp/pupmod-simp-gdm/graphs/contributors
 #
 class gdm (
-  Hash[String, Dconf::SettingsHash] $dconf_hash,
-  Hash[String[1], Optional[Hash]]   $packages,
-  Hash                              $settings,
-  Simplib::PackageEnsure            $package_ensure = simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' }),
-  Boolean                           $include_sec    = true,
-  Boolean                           $auditd         = simplib::lookup('simp_options::auditd', { 'default_value' => false }),
+  Dconf::SettingsHash             $dconf_hash,
+  Hash[String[1], Optional[Hash]] $packages,
+  Hash                            $settings,
+  Simplib::PackageEnsure          $package_ensure = simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' }),
+  Boolean                         $include_sec    = true,
+  Boolean                         $auditd         = simplib::lookup('simp_options::auditd', { 'default_value'         => false }),
+  Boolean                         $banner         = true,
+  String[1]                       $simp_banner    = 'simp',
+  Optional[String[1]]             $banner_content = undef
 ) {
-
   simplib::assert_metadata($module_name)
 
   include gdm::install

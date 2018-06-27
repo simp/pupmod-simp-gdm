@@ -9,6 +9,7 @@ fixtures:
     simplib: https://github.com/simp/pupmod-simp-simplib
     stdlib: https://github.com/simp/puppetlabs-stdlib
     svckill: https://github.com/simp/pupmod-simp-svckill
+    simp_banners: https://github.com/simp/pupmod-simp-simp_banners
 
     # Fixtures needed for acceptance
     gnome: https://github.com/simp/pupmod-simp-gnome
