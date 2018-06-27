@@ -3,6 +3,7 @@
 - Moved package list to data in modules for easy merging and overwriting
 - Added acceptance tests that go through the stages of setting up both GDM and
   GNOME for inspection
+- Update version range of auditd dependency in metadata.json
 
 * Wed Jul 12 2017 Liz Nemsick <lnemsick.simp@gmail.com> - 7.0.3-0
 - Harden acceptance test
