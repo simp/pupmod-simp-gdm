@@ -7,9 +7,9 @@ describe 'gdm' do
         let(:facts) { os_facts }
 
         it { is_expected.to compile.with_all_deps }
-        it { is_expected.to contain_gnome__install('gdm packages') }
+        it { is_expected.to contain_simplib__install('gdm packages') }
         it { is_expected.to contain_notify('Additional Puppet Run Needed for gdm') }
-        it { is_expected.to_not contain_class('gdm::service') }
+        it { is_expected.to contain_class('gdm::service') }
 
         context 'EL7 with GDM = 3.0.0' do
           if os_facts[:operatingsystemmajrelease].to_s >= '7'
@@ -17,8 +17,8 @@ describe 'gdm' do
               let(:facts){ os_facts.merge({:runlevel => '5', :gdm_version => '3.14.2'}) }
               it { is_expected.to compile.with_all_deps }
               it { is_expected.to create_class('gdm') }
-              it { is_expected.to contain_gnome__install('gdm packages').that_notifies('Class[gdm::service]') }
-              it { is_expected.to contain_gnome__install('gdm packages').that_comes_before('Class[gdm::config]') }
+              it { is_expected.to contain_simplib__install('gdm packages').that_notifies('Class[gdm::service]') }
+              it { is_expected.to contain_simplib__install('gdm packages').that_comes_before('Class[gdm::config]') }
               @package = [
                 'gdm', 'xorg-x11-drivers', 'xorg-x11-xinit', 'xorg-x11-utils', 'xorg-x11-docs',
                 'dejavu-sans-fonts', 'dejavu-sans-mono-fonts', 'dejavu-serif-fonts',
@@ -31,12 +31,14 @@ describe 'gdm' do
               @package.each do |pkg|
                 it { is_expected.to contain_package(pkg) }
               end
-              it { is_expected.to contain_class ('gdm::sec') }
               it { is_expected.to_not contain_file('/etc/sysconfig/desktop') }
               it { is_expected.to_not contain_auditd__rule ( 'system_gdm' ) }
               it { is_expected.to_not contain_exec( 'restart_gdm' ) }
-              it { is_expected.to contain_service('gdm') }
-              it { is_expected.to contain_service('accounts-daemon') }
+              it { is_expected.to contain_svckill__ignore('gdm') }
+              it { is_expected.to contain_svckill__ignore('display-manager') }
+              it { is_expected.to contain_svckill__ignore('accounts-daemon') }
+              it { is_expected.to contain_svckill__ignore('upower') }
+              it { is_expected.to contain_svckill__ignore('rtkit-daemon') }
             end
           end
         end
@@ -46,7 +48,7 @@ describe 'gdm' do
               let(:facts){ os_facts.merge({:runlevel => '5', :gdm_version => '2.0.0'}) }
               it { is_expected.to compile.with_all_deps }
               it { is_expected.to create_class('gdm') }
-              it { is_expected.to contain_gnome__install('gdm packages').that_notifies('Class[gdm::service]') }
+              it { is_expected.to contain_simplib__install('gdm packages').that_notifies('Class[gdm::service]') }
 
               @package = [
                 'gdm', 'xorg-x11-apps','xorg-x11-drivers', 'xorg-x11-xinit', 'xorg-x11-twm', 'xterm',
@@ -62,7 +64,6 @@ describe 'gdm' do
               @package.each do |pkg|
                 it { is_expected.to contain_package(pkg) }
               end
-              it { is_expected.to contain_class ('gdm::sec') }
               it { is_expected.to contain_file('/etc/sysconfig/desktop') }
               it { is_expected.to_not contain_auditd__rule ( 'system_gdm' ) }
               it { is_expected.to contain_exec( 'restart_gdm' ) }

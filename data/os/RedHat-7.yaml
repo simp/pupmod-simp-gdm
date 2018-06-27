@@ -2,3 +2,11 @@
 gdm::packages:
   xorg-x11-utils: ~
   xorg-x11-docs: ~
+  pulseaudio: ~
+
+gdm::service::services:
+  - accounts-daemon
+  - display-manager
+  - gdm
+  - rtkit-daemon
+  - upower

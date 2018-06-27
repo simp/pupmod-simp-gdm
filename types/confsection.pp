@@ -1,4 +1,4 @@
-type Gdm::Confsection = Enum[
+type Gdm::ConfSection = Enum[
   'daemon',
   'security',
   'xdmcp',

@@ -23,7 +23,7 @@
 #   managed with this module.
 #
 # @param include_sec Boolean
-#   Include gdm::sec security settings
+#   This no longer has any effect
 #
 # @param auditd
 #   Enable auditd support for this module via the ``simp-auditd`` module
@@ -31,34 +31,24 @@
 # @author https://github.com/simp/pupmod-simp-gdm/graphs/contributors
 #
 class gdm (
-  Gnome::DconfSettings            $dconf_hash,
-  Hash[String[1], Optional[Hash]] $packages,
-  Simplib::PackageEnsure          $package_ensure = simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' }),
-  Boolean                         $include_sec    = true,
-  Boolean                         $auditd         = simplib::lookup('simp_options::auditd', { 'default_value'         => false }),
+  Hash[String, Dconf::SettingsHash] $dconf_hash,
+  Hash[String[1], Optional[Hash]]   $packages,
+  Hash                              $settings,
+  Simplib::PackageEnsure            $package_ensure = simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' }),
+  Boolean                           $include_sec    = true,
+  Boolean                           $auditd         = simplib::lookup('simp_options::auditd', { 'default_value' => false }),
 ) {
 
   simplib::assert_metadata($module_name)
 
-  gnome::install { 'gdm packages':
-    packages       => $packages,
-    package_ensure => $package_ensure
-  }
+  include gdm::install
+  include gdm::service
+
+  Class['gdm::install'] ~> Class['gdm::service']
 
   # If GDM isn't installed, this won't actually exist so we need a two pass run
   # to get this right
   if $facts['gdm_version'] {
-    include 'gdm::service'
-
-    Gnome::Install['gdm packages'] ~> Class['gdm::service']
-
-    if $include_sec {
-      include 'gdm::sec'
-
-      Gnome::Install['gdm packages'] -> Class['gdm::sec']
-      Class['gdm::sec'] ~> Class['gdm::service']
-    }
-
     if ( versioncmp($facts['gdm_version'], '3') < 0 ) and ( versioncmp($facts['gdm_version'], '0.0.0') > 0 ) {
       # Set the desktop variable
       file { '/etc/sysconfig/desktop':
@@ -79,7 +69,7 @@ class gdm (
     else {
       include 'gdm::config'
 
-      Gnome::Install['gdm packages'] -> Class['gdm::config']
+      Class['gdm::install'] -> Class['gdm::config']
       Class['gdm::config'] ~> Class['gdm::service']
     }
   }

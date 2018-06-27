@@ -8,6 +8,10 @@ lookup_options:
     merge:
       strategy: deep
       knockout_prefix: --
+  gdm::settings:
+    merge:
+      strategy: deep
+      knockout_prefix: --
 
 gdm::packages:
   gdm: ~
@@ -28,6 +32,19 @@ gdm::packages:
   liberation-mono-fonts: ~
   liberation-sans-fonts: ~
   liberation-serif-fonts: ~
+
+gdm::settings:
+  chooser:
+    Multicast: false
+  daemon:
+    TimedLoginEnable: false
+    AutomaticLoginEnable: false
+  greeter:
+    IncludeAll: false
+  security:
+    DisallowTCP: true
+  xdmcp:
+    Enable: false
 
 gdm::dconf_hash:
   gdm:

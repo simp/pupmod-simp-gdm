@@ -1,17 +1,27 @@
 require 'spec_helper'
 
 describe 'gdm::set' do
+  context 'supported operating systems' do
+    on_supported_os.each do |os, os_facts|
+      context "on #{os}" do
+        let(:facts) { os_facts }
 
-  let(:title) { 'daemon_chooser' }
+        let(:title) { 'daemon_chooser' }
 
-  let(:params) { {:section => 'daemon', :key => 'Chooser', :value => false } }
+        let(:params) { {:section => 'daemon', :key => 'Chooser', :value => false } }
 
-  it do
-    is_expected.to contain_augeas('gdm_set_daemon_chooser').with({
-      'incl'    => '/etc/gdm/custom.conf',
-      'lens'    => 'Gdm.lns',
-      'changes' => ["set daemon/Chooser 'false'"],
-      'require' => 'Package[gdm]'
-    })
+        it {
+          is_expected.to contain_ini_setting("GDM custom config #{title}").with({
+            'ensure'  => 'present',
+            'path'    => '/etc/gdm/custom.conf',
+            'section' => params[:section],
+            'setting' => params[:key],
+            'value'   => params[:value],
+            'require' => 'Class[Gdm::Install]',
+            'notify'  => 'Class[Gdm::Service]'
+          })
+        }
+      end
+    end
   end
 end

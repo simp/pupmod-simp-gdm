@@ -7,7 +7,7 @@ describe 'simp::gdm class' do
     <<-EOS
       include 'gdm'
 
-      runlevel { '5': persist => true }
+      runlevel { 'graphical': }
     EOS
   }
 
