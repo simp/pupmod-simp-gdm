@@ -13,8 +13,9 @@ describe 'gdm' do
 
         context 'EL7 with GDM = 3.0.0' do
           if os_facts[:operatingsystemmajrelease].to_s >= '7'
+            let(:facts){ os_facts.merge({:runlevel => '5', :gdm_version => '3.14.2'}) }
+
             context 'default parameters' do
-              let(:facts){ os_facts.merge({:runlevel => '5', :gdm_version => '3.14.2'}) }
               it { is_expected.to compile.with_all_deps }
               it { is_expected.to create_class('gdm') }
               it { is_expected.to contain_simplib__install('gdm packages').that_notifies('Class[gdm::service]') }
@@ -39,6 +40,59 @@ describe 'gdm' do
               it { is_expected.to contain_svckill__ignore('accounts-daemon') }
               it { is_expected.to contain_svckill__ignore('upower') }
               it { is_expected.to contain_svckill__ignore('rtkit-daemon') }
+
+              it { is_expected.to create_dconf__settings('GDM Dconf Settings') }
+              it {
+                dconf_resource = catalogue.resource('Dconf::Settings[GDM Dconf Settings]')
+                expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-text']['value']).to match(/ATTENTION/)
+                expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-enable']['value']).to be true
+              }
+            end
+
+            context 'modifying the banner' do
+              context 'disable' do
+                let(:params){{ :banner => false }}
+
+                it { is_expected.to compile.with_all_deps }
+                it { is_expected.to create_dconf__settings('GDM Dconf Settings') }
+                it {
+                  dconf_resource = catalogue.resource('Dconf::Settings[GDM Dconf Settings]')
+                  expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-enable']['value']).to be false
+                }
+              end
+
+              context 'set new content' do
+                let(:params){{ :banner_content => 'I like banners' }}
+                let(:to_match){ "'I like banners'" }
+                let(:dconf_resource){ catalogue.resource('Dconf::Settings[GDM Dconf Settings]')}
+
+                it { is_expected.to compile.with_all_deps }
+                it { is_expected.to create_dconf__settings('GDM Dconf Settings') }
+                it {
+                  expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-enable']['value']).to be true
+                  expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-text']['value']).to eq(to_match)
+                }
+
+                context 'with pre-added quotes' do
+                  let(:params){{ :banner_content => 'I like banners' }}
+                  it { is_expected.to compile.with_all_deps }
+                  it {
+                    expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-text']['value']).to eq(to_match)
+                  }
+                end
+              end
+
+              context 'change simp_banner selection' do
+                let(:params){{ :simp_banner => 'us/department_of_commerce' }}
+
+                it { is_expected.to compile.with_all_deps }
+                it { is_expected.to create_dconf__settings('GDM Dconf Settings') }
+                it {
+                  dconf_resource = catalogue.resource('Dconf::Settings[GDM Dconf Settings]')
+                  expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-enable']['value']).to be true
+                  expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-text']['value']).to match(/Department of Commerce/i)
+                }
+              end
             end
           end
         end

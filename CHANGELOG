@@ -1,4 +1,5 @@
-* Sat May 19 2018 Trevor Vaughan <tvaughan@onyxpoint.com> - 7.1.0-0
+* Wed Jun 27 2018 Trevor Vaughan <tvaughan@onyxpoint.com> - 7.1.0-0
+- Moved the default banner selection to `simp_banners`
 - Added support for setting dconf options for GDM
 - Moved package list to data in modules for easy merging and overwriting
 - Added acceptance tests that go through the stages of setting up both GDM and
