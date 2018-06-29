@@ -61,6 +61,6 @@ class gdm::config {
 
   dconf::settings { 'GDM Dconf Settings':
     profile       => 'gdm',
-    settings_hash => deep_merge($gdm::dconf_hash, $_banner_settings)
+    settings_hash => deep_merge($_banner_settings, $gdm::dconf_hash)
   }
 }

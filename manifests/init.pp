@@ -31,9 +31,7 @@
 # @param banner
 #   Enable a login screen banner
 #
-#   * NOTE: This will *not* take precedence over banner settings set in
-#     `dconf_hash`. If you want to set them there, then you should disable this
-#     setting.
+#   * NOTE: any banner settings set via `dconf_hash` will take precedence
 #
 # @param simp_banner
 #   The name of a banner from the `simp_banners` module that should be used
