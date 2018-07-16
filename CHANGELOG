@@ -1,5 +1,13 @@
-* Tue Mar 20 2018 Trevor Vaughan <tvaughan@onyxpoint.com> - 7.0.4-0
+* Mon Jul 16 2018 Trevor Vaughan <tvaughan@onyxpoint.com> - 7.1.1-0
 - Add Puppet 5 and OEL support
+
+* Wed Jun 27 2018 Trevor Vaughan <tvaughan@onyxpoint.com> - 7.1.0-0
+- Moved the default banner selection to `simp_banners`
+- Added support for setting dconf options for GDM
+- Moved package list to data in modules for easy merging and overwriting
+- Added acceptance tests that go through the stages of setting up both GDM and
+  GNOME for inspection
+- Update version range of auditd dependency in metadata.json
 
 * Wed Jul 12 2017 Liz Nemsick <lnemsick.simp@gmail.com> - 7.0.3-0
 - Harden acceptance test

@@ -7,17 +7,23 @@ describe 'simp::gdm class' do
     <<-EOS
       include 'gdm'
 
-      runlevel { '5': persist => true }
+      runlevel { 'graphical': }
     EOS
   }
 
-  context 'on the hosts' do
-    hosts.each do |host|
-      it 'should work with no errors' do
-        apply_manifest_on(host, manifest, :catch_failures => true)
+  hosts.each do |host|
+    context "on #{host}" do
+      it 'should work but may have errors' do
+        apply_manifest_on(host, manifest, :allow_all_exit_codes => true)
       end
 
-      it 'should require two runs' do
+      it 'should require a reboot and relabel' do
+        # This is needed to get the SELinux contexts worked out properly
+        on(host, 'touch /.autorelabel')
+        host.reboot
+      end
+
+      it 'should require another run' do
         # This needs two runs due to the GDM version fact
         apply_manifest_on(host, manifest, :catch_failures => true)
       end

@@ -1,21 +1,16 @@
-# This class installs GDM dependencies.
+# Install the GDM components
 #
-# @param package_list
-#   List of required packages to install GDM
-#
-# @param extra_packages
-#   User defined packages to install for GDM
-#
-# @author Trevor Vaughan <tvaughan@onyxpoint.com>
-# @author Nick Markowski <nmarkowski@keywcorp.com>
-#
-class gdm::install (
-  Array[String] $package_list   = gdm::packages(),
-  Array[String] $extra_packages = []
-){
+# @api private
+class gdm::install {
+
   assert_private()
 
-  package { ($package_list + $extra_packages) :
-    ensure => 'latest'
+  simplib::assert_metadata($module_name)
+
+  $_package_defaults = { 'ensure' => $gdm::package_ensure }
+
+  simplib::install { 'gdm packages':
+    packages => $gdm::packages,
+    defaults => $_package_defaults
   }
 }

@@ -1,8 +1,7 @@
 # This define allows you to set individual configuration elements in
-# /etc/gdm/custom.conf without explicitly needing to specify all of the augeas
-# parameters.
+# /etc/gdm/custom.conf without explicitly needing to use an `inifile` resource.
 #
-# If you wish to simply use the augeas type, that is perfectly valid!
+# If you wish to simply use `inifile`, that is perfectly valid!
 #
 # For particular configuration parameters, please see:
 #   http://projects.gnome.org/gdm/docs/2.16/configuration.html
@@ -21,17 +20,20 @@
 # @author Trevor Vaughan <tvaughan@onyxpoint.com>
 #
 define gdm::set (
-  Gdm::Confsection        $section,
+  Gdm::ConfSection        $section,
   String                  $key,
   Variant[Boolean,String] $value
 ) {
 
-  include 'gdm::install'
+  include 'gdm'
 
-  augeas { "gdm_set_${name}":
-    incl    => '/etc/gdm/custom.conf',
-    lens    => 'Gdm.lns',
-    changes => [ "set ${section}/${key} '${value}'" ],
-    require => Package['gdm']
+  ini_setting { "GDM custom config ${name}":
+    ensure  => 'present',
+    path    => '/etc/gdm/custom.conf',
+    section => $section,
+    setting => $key,
+    value   => $value,
+    require => Class['gdm::install'],
+    notify  => Class['gdm::service']
   }
 }

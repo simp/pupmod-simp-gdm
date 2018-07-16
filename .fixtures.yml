@@ -1,20 +1,17 @@
 ---
 fixtures:
   repositories:
-    auditd:    "https://github.com/simp/pupmod-simp-auditd"
-    augeasproviders_core:
-      repo:    "https://github.com/simp/augeasproviders_core"
-      branch:  "simp-master"
-    augeasproviders_grub:
-      repo:    "https://github.com/simp/augeasproviders_grub"
-      branch:  "simp-master"
-    logrotate: "https://github.com/simp/pupmod-simp-logrotate"
-    pki:       "https://github.com/simp/pupmod-simp-pki"
-    rsyslog:   "https://github.com/simp/pupmod-simp-rsyslog"
-    simpcat:   "https://github.com/simp/pupmod-simp-simpcat"
-    simplib:   "https://github.com/simp/pupmod-simp-simplib"
-    stdlib:
-      repo:    "https://github.com/simp/puppetlabs-stdlib"
-      branch:  "master"
+    concat: https://github.com/simp/puppetlabs-concat
+    compliance_markup: https://github.com/simp/pupmod-simp-compliance_markup
+    dconf: https://github.com/simp/pupmod-simp-dconf
+    inifile: https://github.com/simp/puppetlabs-inifile
+    polkit: https://github.com/simp/pupmod-simp-polkit
+    simplib: https://github.com/simp/pupmod-simp-simplib
+    stdlib: https://github.com/simp/puppetlabs-stdlib
+    svckill: https://github.com/simp/pupmod-simp-svckill
+    simp_banners: https://github.com/simp/pupmod-simp-simp_banners
+
+    # Fixtures needed for acceptance
+    gnome: https://github.com/simp/pupmod-simp-gnome
   symlinks:
     gdm: "#{source_dir}"

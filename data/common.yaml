@@ -1,0 +1,56 @@
+---
+lookup_options:
+  gdm::dconf_hash:
+    merge:
+      strategy: deep
+      knockout_prefix: --
+  gdm::packages:
+    merge:
+      strategy: deep
+      knockout_prefix: --
+  gdm::settings:
+    merge:
+      strategy: deep
+      knockout_prefix: --
+
+gdm::packages:
+  gdm: ~
+  xorg-x11-fonts-100dpi: ~
+  xorg-x11-fonts-75dpi: ~
+  xorg-x11-fonts-ISO8859-1-100dpi: ~
+  xorg-x11-fonts-ISO8859-1-75dpi: ~
+  xorg-x11-fonts-Type1: ~
+  xorg-x11-fonts-misc: ~
+  xorg-x11-server-Xorg: ~
+  xorg-x11-drivers: ~
+  xorg-x11-xinit: ~
+  dejavu-sans-fonts: ~
+  dejavu-sans-mono-fonts: ~
+  dejavu-serif-fonts: ~
+  bitmap-fixed-fonts: ~
+  bitmap-lucida-typewriter-fonts: ~
+  liberation-mono-fonts: ~
+  liberation-sans-fonts: ~
+  liberation-serif-fonts: ~
+
+gdm::settings:
+  chooser:
+    Multicast: false
+  daemon:
+    TimedLoginEnable: false
+    AutomaticLoginEnable: false
+  greeter:
+    IncludeAll: false
+  security:
+    DisallowTCP: true
+  xdmcp:
+    Enable: false
+
+gdm::dconf_hash:
+  org/gnome/login-screen:
+    # Removes Shutdown From Login Screen
+    disable-restart-buttons:
+      value: true
+    # Do not show the list of available users at login screen
+    disable-user-list:
+      value: true
