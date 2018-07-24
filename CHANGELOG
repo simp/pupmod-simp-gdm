@@ -1,3 +1,6 @@
+* Mon Jul 16 2018 Trevor Vaughan <tvaughan@onyxpoint.com> - 7.1.1-0
+- Add Puppet 5 and OEL support
+
 * Wed Jun 27 2018 Trevor Vaughan <tvaughan@onyxpoint.com> - 7.1.0-0
 - Moved the default banner selection to `simp_banners`
 - Added support for setting dconf options for GDM
