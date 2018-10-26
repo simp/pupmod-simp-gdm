@@ -163,7 +163,7 @@ default-puppet5:
   <<: *cache_bundler
   <<: *setup_bundler_env
   variables:
-    PUPPET_VERSION: '5.4'
+    PUPPET_VERSION: '~> 5.4'
     BEAKER_PUPPET_COLLECTION: 'puppet5'
   script:
     - bundle exec rake spec_clean
@@ -177,7 +177,7 @@ default-fips-puppet5:
   <<: *setup_bundler_env
   variables:
     BEAKER_fips: 'yes'
-    PUPPET_VERSION: '5.4'
+    PUPPET_VERSION: '~> 5.4'
     BEAKER_PUPPET_COLLECTION: 'puppet5'
   script:
     - bundle exec rake spec_clean
@@ -190,7 +190,7 @@ default-oel-puppet5:
   <<: *cache_bundler
   <<: *setup_bundler_env
   variables:
-    PUPPET_VERSION: '5.4'
+    PUPPET_VERSION: '~> 5.4'
     BEAKER_PUPPET_COLLECTION: 'puppet5'
   script:
     - bundle exec rake spec_clean
