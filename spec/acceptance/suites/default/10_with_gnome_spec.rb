@@ -17,7 +17,7 @@ describe 'simp::gdm with gnome' do
 
       # After this, you can try the GUI and see what happens
       it 'should have GNOME installed' do
-        host.check_for_command('gnome-session').should be true
+        expect(host.check_for_command('gnome-session')).to be true
       end
     end
   end
