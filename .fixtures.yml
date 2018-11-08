@@ -1,8 +1,13 @@
 ---
 fixtures:
   repositories:
+    compliance_markup:
+      repo: "https://github.com/simp/pupmod-simp-compliance_markup"
+      branch: "testing_hotfix_06062019"
     concat: https://github.com/simp/puppetlabs-concat
-    compliance_markup: https://github.com/simp/pupmod-simp-compliance_markup
+    compliance_markup:
+      repo: "https://github.com/simp/pupmod-simp-compliance_markup"
+      branch: "testing_hotfix_06062019"
     dconf: https://github.com/simp/pupmod-simp-dconf
     inifile: https://github.com/simp/puppetlabs-inifile
     polkit: https://github.com/simp/pupmod-simp-polkit
