@@ -205,32 +205,39 @@ pup4.10:
   <<: *pup_4_10
   <<: *acceptance_tests
   script:
-    - 'bundle exec rake beaker:suites'
+    - 'bundle exec rake beaker:suites[default]'
 
 pup4.10-fips:
   <<: *pup_4_10
   <<: *acceptance_tests
   <<: *only_with_SIMP_FULL_MATRIX
   script:
-    - 'BEAKER_fips=yes bundle exec rake beaker:suites'
+    - 'BEAKER_fips=yes bundle exec rake beaker:suites[default]'
 
 pup5.5.7:
   <<: *pup_5_5_7
   <<: *acceptance_tests
   script:
-    - 'bundle exec rake beaker:suites'
+    - 'bundle exec rake beaker:suites[default]'
 
 pup5.5.7-fips:
   <<: *pup_5_5_7
   <<: *acceptance_tests
   script:
-    - 'BEAKER_fips=yes bundle exec rake beaker:suites'
+    - 'BEAKER_fips=yes bundle exec rake beaker:suites[default]'
 
 pup5.5.7-oel:
   <<: *pup_5_5_7
   <<: *acceptance_tests
   script:
     - 'bundle exec rake beaker:suites[default,oel]'
+
+pup5.5.7-oel-fips:
+  <<: *pup_5_5_7
+  <<: *acceptance_tests
+  <<: *only_with_SIMP_FULL_MATRIX
+  script:
+    - 'BEAKER_fips=yes bundle exec rake beaker:suites[default,oel]'
 
 pup.5.5.7-compliance-fips:
   <<: *pup_5_5_7
