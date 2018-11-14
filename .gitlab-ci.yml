@@ -226,18 +226,25 @@ pup5.5.7-fips:
   script:
     - 'BEAKER_fips=yes bundle exec rake beaker:suites[default]'
 
-pup5.5.7-oel:
-  <<: *pup_5_5_7
-  <<: *acceptance_tests
-  script:
-    - 'bundle exec rake beaker:suites[default,oel]'
-
-pup5.5.7-oel-fips:
-  <<: *pup_5_5_7
-  <<: *acceptance_tests
-  <<: *only_with_SIMP_FULL_MATRIX
-  script:
-    - 'BEAKER_fips=yes bundle exec rake beaker:suites[default,oel]'
+# When OEL flips into graphical mode, it prompts the user to answer EULA
+# questions in a way that we cannot intercept.
+#
+# The OEL tests will be disabled until this can be remedied. If running these
+# tests by hand, you will need to grab a console window for the running VM and
+# address the prompt for the tests to complete.
+#
+# pup5.5.7-oel:
+#   <<: *pup_5_5_7
+#   <<: *acceptance_tests
+#   script:
+#     - 'bundle exec rake beaker:suites[default,oel]'
+#
+# pup5.5.7-oel-fips:
+#   <<: *pup_5_5_7
+#   <<: *acceptance_tests
+#   <<: *only_with_SIMP_FULL_MATRIX
+#   script:
+#     - 'BEAKER_fips=yes bundle exec rake beaker:suites[default,oel]'
 
 pup.5.5.7-compliance-fips:
   <<: *pup_5_5_7
