@@ -246,8 +246,11 @@ pup5.5.7-fips:
 #   script:
 #     - 'BEAKER_fips=yes bundle exec rake beaker:suites[default,oel]'
 
-pup.5.5.7-compliance-fips:
-  <<: *pup_5_5_7
-  <<: *compliance_tests
-  script:
-    - 'BEAKER_fips=yes bundle exec rake beaker:suites[compliance]'
+# This is disabled until the 'subsystem' tags get appropriately updated in the
+# inspec-profile-disa_stig-el7 project
+#
+# pup.5.5.7-compliance-fips:
+#   <<: *pup_5_5_7
+#   <<: *compliance_tests
+#   script:
+#     - 'BEAKER_fips=yes bundle exec rake beaker:suites[compliance]'
