@@ -1,0 +1,14 @@
+name: EL7 gdm STIG
+title: PAM STIG for EL 7
+supports:
+  - os-family: redhat
+maintainer: Trevor Vaughan
+copyright: Onyx Point, Inc.
+copyright_email: tvaughan@onyxpoint.com
+license: Apache-2.0
+summary: |
+  A collection of InSpec tests for the gdm subsystem
+version: 0.0.1
+depends:
+  - name: disa_stig-el7-baseline
+    path: ../../inspec_deps/inspec_profiles/profiles/disa_stig-el7-baseline
