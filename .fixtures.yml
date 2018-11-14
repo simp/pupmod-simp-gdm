@@ -11,6 +11,12 @@ fixtures:
     svckill: https://github.com/simp/pupmod-simp-svckill
     simp_banners: https://github.com/simp/pupmod-simp-simp_banners
 
+    # For compliance testing
+    disa_stig-el7-baseline:
+      repo: https://github.com/simp/inspec-profile-disa_stig-el7
+      branch:  master
+      target: spec/fixtures/inspec_deps/inspec_profiles/profiles
+
     # Fixtures needed for acceptance
     gnome: https://github.com/simp/pupmod-simp-gnome
   symlinks:
