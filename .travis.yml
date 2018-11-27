@@ -24,7 +24,7 @@ stages:
   - check
   - spec
   - name: deploy
-    if: 'fork = false AND tag = true'
+    if: 'tag IS present'
 
 bundler_args: --without development system_tests --path .vendor
 
@@ -48,8 +48,9 @@ jobs:
 
   include:
     - stage: check
+      name: 'Syntax, style, and validation checks'
       rvm: 2.4.4
-      env: PUPPET_VERSION="~> 5.5"
+      env: PUPPET_VERSION="~> 5"
       script:
         - bundle exec rake check:dot_underscore
         - bundle exec rake check:test_file
@@ -59,6 +60,7 @@ jobs:
         - bundle exec rake pkg:create_tag_changelog
         - bundle exec rake lint
         - bundle exec puppet module build
+
     - stage: spec
       name: 'Puppet 4.10 (SIMP 6.2, PE 2016.4)'
       rvm: 2.1.9
@@ -90,7 +92,7 @@ jobs:
     - stage: spec
       name: 'Latest Puppet 6.x (allowed to fail)'
       rvm: 2.5.1
-      env: PUPPET_VERSION="~>6.0"
+      env: PUPPET_VERSION="~> 6.0"
       script:
         - bundle exec rake spec
 
