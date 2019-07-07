@@ -7,6 +7,8 @@ checks:
       value: true
     type: puppet-class-parameter
     controls:
+      nist_800_53:rev4: true
+      nist_800_53:rev4:AC-8:a: true
       disa_stig: true
       cci:CCI-000048: true
       RHEL-07-010030: true
@@ -20,26 +22,6 @@ checks:
       - SRG-OS-000023-GPOS-00006
       - SRG-OS-000023-GPOS-00007
       - SRG-OS-000023-GPOS-00008
-    confine:
-      osfamily: RedHat
-      operatingsystemmajrelease: '7'
-  oval:com.puppet.forge.simp.gdm.dconf_hash:
-    settings:
-      parameter: gdm::dconf_hash
-      value:
-        org/gnome/login-screen:
-          disable-restart-buttons:
-            value: true
-          disable-user-list:
-            value: true
-    type: puppet-class-parameter
-    controls:
-      disa_stig: true
-    identifiers:
-      disa_stig: []
-    confine:
-      osfamily: RedHat
-      operatingsystemmajrelease: '7'
   oval:com.puppet.forge.simp.gdm.settings:
     settings:
       parameter: gdm::settings
@@ -57,6 +39,8 @@ checks:
           Enable: false
     type: puppet-class-parameter
     controls:
+      nist_800_53:rev4: true
+      nist_800_53:rev4:CM-6:b: true
       disa_stig: true
       cci:CCI-000366: true
       RHEL-07-010440: true
@@ -68,9 +52,6 @@ checks:
       - RHEL-07-010440
       - RHEL-07-010450
       - SRG-OS-000480-GPOS-00229
-    confine:
-      osfamily: RedHat
-      operatingsystemmajrelease: '7'
   oval:com.puppet.forge.simp.gdm.simp_banner:
     settings:
       parameter: gdm::simp_banner
@@ -84,12 +65,11 @@ checks:
       SRG-OS-000023-GPOS-00007: true
       SRG-OS-000023-GPOS-00008: true
     identifiers:
+      nist_800_53:rev4: true
+      nist_800_53:rev4:AC-8:a: true
       disa_stig:
       - CCI-000048
       - RHEL-07-010030
       - SRG-OS-000023-GPOS-00006
       - SRG-OS-000023-GPOS-00007
       - SRG-OS-000023-GPOS-00008
-    confine:
-      osfamily: RedHat
-      operatingsystemmajrelease: '7'
