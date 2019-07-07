@@ -1,6 +1,7 @@
 ---
 fixtures:
   repositories:
+    compliance_markup: https://github.com/simp/pupmod-simp-compliance_markup
     concat: https://github.com/simp/puppetlabs-concat
     compliance_markup: https://github.com/simp/pupmod-simp-compliance_markup
     dconf: https://github.com/simp/pupmod-simp-dconf
@@ -9,6 +10,7 @@ fixtures:
     simplib: https://github.com/simp/pupmod-simp-simplib
     stdlib: https://github.com/simp/puppetlabs-stdlib
     svckill: https://github.com/simp/pupmod-simp-svckill
+    simp_options: https://github.com/simp/pupmod-simp-simp_options
     simp_banners: https://github.com/simp/pupmod-simp-simp_banners
 
     # For compliance testing

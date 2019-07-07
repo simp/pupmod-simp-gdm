@@ -1,0 +1,75 @@
+---
+version: 2.0.0
+checks:
+  oval:com.puppet.forge.simp.gdm.banner:
+    settings:
+      parameter: gdm::banner
+      value: true
+    type: puppet-class-parameter
+    controls:
+      nist_800_53:rev4: true
+      nist_800_53:rev4:AC-8:a: true
+      disa_stig: true
+      cci:CCI-000048: true
+      RHEL-07-010030: true
+      SRG-OS-000023-GPOS-00006: true
+      SRG-OS-000023-GPOS-00007: true
+      SRG-OS-000023-GPOS-00008: true
+    identifiers:
+      disa_stig:
+      - CCI-000048
+      - RHEL-07-010030
+      - SRG-OS-000023-GPOS-00006
+      - SRG-OS-000023-GPOS-00007
+      - SRG-OS-000023-GPOS-00008
+  oval:com.puppet.forge.simp.gdm.settings:
+    settings:
+      parameter: gdm::settings
+      value:
+        chooser:
+          Multicast: false
+        daemon:
+          TimedLoginEnable: false
+          AutomaticLoginEnable: false
+        greeter:
+          IncludeAll: false
+        security:
+          DisallowTCP: true
+        xdmcp:
+          Enable: false
+    type: puppet-class-parameter
+    controls:
+      nist_800_53:rev4: true
+      nist_800_53:rev4:CM-6:b: true
+      disa_stig: true
+      cci:CCI-000366: true
+      RHEL-07-010440: true
+      RHEL-07-010450: true
+      SRG-OS-000480-GPOS-00229: true
+    identifiers:
+      disa_stig:
+      - CCI-000366
+      - RHEL-07-010440
+      - RHEL-07-010450
+      - SRG-OS-000480-GPOS-00229
+  oval:com.puppet.forge.simp.gdm.simp_banner:
+    settings:
+      parameter: gdm::simp_banner
+      value: us/department_of_defense
+    type: puppet-class-parameter
+    controls:
+      disa_stig: true
+      cci:CCI-000048: true
+      RHEL-07-010030: true
+      SRG-OS-000023-GPOS-00006: true
+      SRG-OS-000023-GPOS-00007: true
+      SRG-OS-000023-GPOS-00008: true
+    identifiers:
+      nist_800_53:rev4: true
+      nist_800_53:rev4:AC-8:a: true
+      disa_stig:
+      - CCI-000048
+      - RHEL-07-010030
+      - SRG-OS-000023-GPOS-00006
+      - SRG-OS-000023-GPOS-00007
+      - SRG-OS-000023-GPOS-00008

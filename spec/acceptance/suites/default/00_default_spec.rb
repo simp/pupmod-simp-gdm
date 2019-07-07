@@ -13,6 +13,14 @@ describe 'simp::gdm class' do
 
   hosts.each do |host|
     context "on #{host}" do
+      # Work around the issue where the system hangs. I don't quite recall what
+      # the issue was here but on some versions of EL7 there was a bug where
+      # the system would not allow changing runlevels and would become
+      # completely unresponsive.
+      it 'should have the latest packages' do
+        on(host, 'yum -y update')
+      end
+
       it 'should work but may have errors' do
         apply_manifest_on(host, manifest, :allow_all_exit_codes => true)
       end

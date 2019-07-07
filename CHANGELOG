@@ -1,3 +1,6 @@
+* Thu Jun 06 2019 Steven Pritchard <steven.pritchard@onyxpoint.com> -7.2.0-0
+- Add v2 compliance_markup data
+
 * Thu Mar 07 2019 Liz Nemsick <lnemsick.simp@gmail.com> - 7.1.1-0
 - Update the upper bound of stdlib to < 6.0.0
 - Update a URL in the README.md
