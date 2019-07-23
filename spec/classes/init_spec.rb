@@ -47,6 +47,20 @@ describe 'gdm' do
                 expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-text']['value']).to match(/ATTENTION/)
                 expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-enable']['value']).to be true
               }
+              it {
+                is_expected.to create_gdm__set('GDM [chooser] Multicast:false').with(
+                  {
+                    :section => 'chooser',
+                    :key     => 'Multicast',
+                    :value   => 'false'
+                  }
+                )
+              }
+              it { is_expected.to create_gdm__set('GDM [daemon] TimedLoginEnable:false') }
+              it { is_expected.to create_gdm__set('GDM [daemon] AutomaticLoginEnable:false') }
+              it { is_expected.to create_gdm__set('GDM [greeter] IncludeAll:false') }
+              it { is_expected.to create_gdm__set('GDM [security] DisallowTCP:true') }
+              it { is_expected.to create_gdm__set('GDM [xdmcp] Enable:false') }
             end
 
             context 'modifying the banner' do

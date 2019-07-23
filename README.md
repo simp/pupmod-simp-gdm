@@ -4,6 +4,8 @@
 [![Puppet Forge Downloads](https://img.shields.io/puppetforge/dt/simp/gdm.svg)](https://forge.puppetlabs.com/simp/gdm)
 [![Build Status](https://travis-ci.org/simp/pupmod-simp-gdm.svg)](https://travis-ci.org/simp/pupmod-simp-gdm)
 
+See [REFERENCE.md](./REFERENCE.md) for usage details.
+
 ## This is a SIMP module
 This module is a component of the [System Integrity Management Platform](https://simp-project.com), a compliance-management framework built on Puppet.
 

@@ -1,4 +1,4 @@
-# Install the GDM components
+# @summary Install the GDM components
 #
 # @api private
 class gdm::install {

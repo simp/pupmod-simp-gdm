@@ -1,5 +1,4 @@
-# Configuration items for GDM
-#
+# @summary Configuration items for GDM
 #
 class gdm::config {
   assert_private()
