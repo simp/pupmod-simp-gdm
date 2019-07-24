@@ -1,5 +1,6 @@
-# This define allows you to set individual configuration elements in
-# /etc/gdm/custom.conf without explicitly needing to use an `inifile` resource.
+# @summary This define allows you to set individual configuration elements in
+# `/etc/gdm/custom.conf` without explicitly needing to use an `inifile`
+# resource.
 #
 # If you wish to simply use `inifile`, that is perfectly valid!
 #

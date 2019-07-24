@@ -1,4 +1,4 @@
-# Ensures the GDM service is properly configured
+# @summary Ensures the GDM service is properly configured
 #
 # This will **NOT** switch the runlevel by default since this is a potentially
 # dangerous activity if graphics drivers are having issues.

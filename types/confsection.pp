@@ -1,3 +1,4 @@
+# @summary Top level sections in /etc/gdm/custom.conf
 type Gdm::ConfSection = Enum[
   'daemon',
   'security',
