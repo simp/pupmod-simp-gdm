@@ -78,48 +78,10 @@ class gdm (
   simplib::assert_metadata($module_name)
 
   include gdm::install
+  include gdm::config
   include gdm::service
 
+  Class['gdm::install'] -> Class['gdm::config']
   Class['gdm::install'] ~> Class['gdm::service']
-
-  # If GDM isn't installed, this won't actually exist so we need a two pass run
-  # to get this right
-  if $facts['gdm_version'] {
-    if ( versioncmp($facts['gdm_version'], '3') < 0 ) and ( versioncmp($facts['gdm_version'], '0.0.0') > 0 ) {
-      # Set the desktop variable
-      file { '/etc/sysconfig/desktop':
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0644',
-        content => "DESKTOP='GNOME'\n",
-        notify  => Class['gdm::service']
-      }
-
-      # Audit the default gdm system-wide configuration file.
-      if $auditd {
-        auditd::rule { 'system_gdm':
-          content => '-w /usr/share/gdm/defaults.conf -p wa -k CFG_sys'
-        }
-      }
-    }
-    else {
-      include 'gdm::config'
-
-      Class['gdm::install'] -> Class['gdm::config']
-      Class['gdm::config'] ~> Class['gdm::service']
-    }
-  }
-  else {
-    notify { "Additional Puppet Run Needed for ${module_name}": }
-  }
-
-  $settings.each |Gdm::ConfSection $section, NotUndef $section_settings| {
-    $section_settings.each |String $key, $value| {
-      gdm::set { "GDM [${section}] ${key}:${value}":
-        section => $section,
-        key     => $key,
-        value   => $value
-      }
-    }
-  }
+  Class['gdm::config']  ~> Class['gdm::service']
 }
