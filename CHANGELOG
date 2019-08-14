@@ -1,3 +1,6 @@
+* Fri Aug 02 2019 Robert Vincent <pillarsdotnet@gmail.com> - 7.2.1-0
+- Support puppetlabs/inifile 3.x.
+
 * Mon Jul 22 2019 Trevor Vaughan <tvaughan@onyxpoint.com> - 7.2.0-0
 - Fixed an issue where gdm::settings was not being applied to the system
 - Added REFERENCE.md
