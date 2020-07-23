@@ -1,3 +1,6 @@
+* Thu Jul 20 2020 Jeanne Greulich <jeanne.greulich@onyxpoint.com> - 7.2.2-0
+- update the upper bound of simplib for SIMP 6.5 release
+
 * Fri Aug 02 2019 Robert Vincent <pillarsdotnet@gmail.com> - 7.2.1-0
 - Support puppetlabs/inifile 3.x.
 
