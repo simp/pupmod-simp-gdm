@@ -1,3 +1,6 @@
+* Wed Jul 29 2020 Jeanne Greulich <jeanne.greulich@onyxpoint.com> - 7.2.3-0
+- update the upper bound of puppetlabs/inifiles for SIMP 6.5 release
+
 * Thu Jul 23 2020 Jeanne Greulich <jeanne.greulich@onyxpoint.com> - 7.2.2-0
 - update the upper bound of simplib for SIMP 6.5 release
 
