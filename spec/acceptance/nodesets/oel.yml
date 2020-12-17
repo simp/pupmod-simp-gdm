@@ -6,22 +6,12 @@
   end
 -%>
 HOSTS:
-  oel6:
-    roles:
-      - default
-      - master
-      - client
-    platform:   el-6-x86_64
-    box:        onyxpoint/oel-6-x86_64
-    hypervisor: <%= hypervisor %>
-    yum_repos:
-      epel:
-        mirrorlist: 'https://mirrors.fedoraproject.org/metalink?repo=epel-6&arch=$basearch'
-        gpgkeys:
-          - https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6
   oel7:
     roles:
       - client
+      # roles migrated from now-removed el6 node(s): 
+      - default
+      - master
     platform:   el-7-x86_64
     box:        onyxpoint/oel-7-x86_64
     hypervisor: <%= hypervisor %>
