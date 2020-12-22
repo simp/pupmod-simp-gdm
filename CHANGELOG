@@ -1,3 +1,6 @@
+* Thu Dec 17 2020 Chris Tessmer <chris.tessmer@onyxpoint.com> - 7.2.4
+- Removed EL6 support
+
 * Wed Jul 29 2020 Jeanne Greulich <jeanne.greulich@onyxpoint.com> - 7.2.3-0
 - update the upper bound of puppetlabs/inifiles for SIMP 6.5 release
 
