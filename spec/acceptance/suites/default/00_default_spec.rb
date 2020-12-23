@@ -21,14 +21,14 @@ describe 'simp::gdm class' do
         on(host, 'yum -y update')
       end
 
-      it 'should work but may have errors' do
-        apply_manifest_on(host, manifest, :allow_all_exit_codes => true)
-      end
-
       it 'should require a reboot and relabel' do
         # This is needed to get the SELinux contexts worked out properly
         on(host, 'touch /.autorelabel')
         host.reboot
+      end
+
+      it 'should work but may have errors' do
+        apply_manifest_on(host, manifest, :allow_all_exit_codes => true)
       end
 
       it 'should require another run' do

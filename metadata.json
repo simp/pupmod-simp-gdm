@@ -19,16 +19,8 @@
       "version_requirement": ">= 0.1.0 < 2.0.0"
     },
     {
-      "name": "simp/auditd",
-      "version_requirement": ">= 7.0.0 < 9.0.0"
-    },
-    {
       "name": "simp/dconf",
       "version_requirement": ">= 0.0.1 < 2.0.0"
-    },
-    {
-      "name": "simp/gnome",
-      "version_requirement": ">= 8.0.0 < 9.0.0"
     },
     {
       "name": "simp/simplib",
@@ -43,23 +35,38 @@
       "version_requirement": ">= 4.13.1 < 7.0.0"
     }
   ],
+  "simp": {
+    "optional_dependencies": [
+      {
+        "name": "camptocamp/systemd",
+        "version_requirement": ">= 2.2.0 < 3.0.0"
+      },
+      {
+        "name": "simp/pam",
+        "version_requirement": ">= 6.8.3 < 7.0.0"
+      }
+    ]
+  },
   "operatingsystem_support": [
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
-        "7"
+        "7",
+        "8"
       ]
     },
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "7"
+        "7",
+        "8"
       ]
     },
     {
       "operatingsystem": "OracleLinux",
       "operatingsystemrelease": [
-        "7"
+        "7",
+        "8"
       ]
     }
   ],

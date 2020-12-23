@@ -45,6 +45,9 @@
 # @param auditd
 #   Enable auditd support for this module via the ``simp-auditd`` module
 #
+# @param pam
+#   Enable pam support for this module via the ``simp-pam`` module
+#
 # @param banner
 #   Enable a login screen banner
 #
@@ -71,8 +74,10 @@ class gdm (
   Simplib::PackageEnsure          $package_ensure   = simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' }),
   Boolean                         $include_sec      = true,
   Boolean                         $auditd           = simplib::lookup('simp_options::auditd', { 'default_value' => false }),
+  Boolean                         $pam              = simplib::lookup('simp_options::pam   ', { 'default_value' => false }),
   Boolean                         $banner           = true,
   String[1]                       $simp_banner      = 'simp',
+  String[1]                       $display_mgr_user = 'gdm',
   Optional[String[1]]             $banner_content   = undef
 ) {
   simplib::assert_metadata($module_name)

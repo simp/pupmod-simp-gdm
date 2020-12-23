@@ -18,30 +18,16 @@ class gdm::config {
   # to get this right
   if $facts['gdm_version'] {
     if ( versioncmp($facts['gdm_version'], '3') < 0 ) and ( versioncmp($facts['gdm_version'], '0.0.0') > 0 ) {
-      # Set the desktop variable
-      file { '/etc/sysconfig/desktop':
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0644',
-        content => "DESKTOP='GNOME'\n",
-        notify  => Class['gdm::service']
-      }
-
-      # Audit the default gdm system-wide configuration file.
-      if $gdm::auditd {
-        auditd::rule { 'system_gdm':
-          content => '-w /usr/share/gdm/defaults.conf -p wa -k CFG_sys'
-        }
-      }
+      fail("Version of GDM not supported by this module: ${facts['gdm_version']}")
     }
     else {
       dconf::profile { 'gdm':
         entries => {
-          'user' => {
+          'user'                                  => {
             'type'  => 'user',
             'order' => 1
           },
-          'gdm'  => {
+          'gdm'                                   => {
             'type' => 'system'
           },
           '/usr/share/gdm/greeter-dconf-defaults' => {
@@ -99,4 +85,5 @@ class gdm::config {
   else {
     notify { "Additional Puppet Run Needed for ${module_name}": }
   }
+
 }
