@@ -48,6 +48,10 @@
 # @param pam
 #   Enable pam support for this module via the ``simp-pam`` module
 #
+# @param display_mgr_user
+#   The name of the local user that runs the display manager.  If pam is enabled
+#   this user will be given local access to the system to it can start the service.
+#
 # @param banner
 #   Enable a login screen banner
 #

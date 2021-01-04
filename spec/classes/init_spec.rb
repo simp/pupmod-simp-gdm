@@ -11,7 +11,7 @@ describe 'gdm' do
         it { is_expected.to contain_notify('Additional Puppet Run Needed for gdm') }
         it { is_expected.to contain_class('gdm::service') }
 
-        context 'EL7 with GDM = 3.0.0' do
+        context 'GDM = 3.0.0' do
           let(:facts){ os_facts.merge({:runlevel => '5', :gdm_version => '3.14.2'}) }
 
           context 'default parameters' do
@@ -84,7 +84,7 @@ describe 'gdm' do
               }
 
               context 'with pre-added quotes' do
-                let(:params){{ :banner_content => 'I like banners' }}
+                let(:params){{ :banner_content => "I like banners" }}
                 it { is_expected.to compile.with_all_deps }
                 it {
                   expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-text']['value']).to eq(to_match)

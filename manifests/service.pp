@@ -15,7 +15,7 @@
 class gdm::service (
   Optional[Array[String[1]]] $services = undef
 ){
-  Service { 'gdm':
+  service { 'gdm':
     ensure => 'running',
     enable => 'true'
   }
