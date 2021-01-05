@@ -11,6 +11,10 @@
                 local access to the system. Defaults to simp_options::pam.
     gdm::display_mgr_user  - the name of the user that the gdm service will run under.
                 Defaults to 'gdm'
+- pupmod-simp-gnome and pupmod-simp-auditd were removed from the dependencies
+  in metadata.json.
+- pupmod-simp-pam was added to optional dependencies and is needed if gdm:pam
+  is set to true.
 
 * Thu Dec 17 2020 Chris Tessmer <chris.tessmer@onyxpoint.com> - 7.2.4
 - Removed EL6 support
