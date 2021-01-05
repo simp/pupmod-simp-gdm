@@ -1,4 +1,4 @@
-* Tue Dec 22 2020 Jeanne Greulich <jeanne.greulich@onyxpoint.com> - 7.2.4
+* Tue Dec 22 2020 Jeanne Greulich <jeanne.greulich@onyxpoint.com> - 7.3.0
 - Added EL8 support
 - Added check for hidepid on /proc.  If it is on, update the systemd-logind service
   entry to include the hidepid group as a supplementary group and restart the
