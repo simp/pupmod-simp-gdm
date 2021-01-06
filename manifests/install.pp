@@ -46,7 +46,7 @@ class gdm::install {
             | SYSTEMD_OVERRIDE
         }
 
-        # Need to restart the logind deamon for it pick up the change.
+        # Need to restart the logind daemon for it pick up the change.
         exec { 'gdm_restart_logind':
           command     => 'systemctl restart systemd-logind',
           refreshonly => true,
