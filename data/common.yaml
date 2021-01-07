@@ -34,7 +34,6 @@ gdm::packages:
   liberation-serif-fonts: ~
   xorg-x11-utils: ~
   xorg-x11-docs: ~
-  pulseaudio: ~
 
 gdm::settings:
   chooser:

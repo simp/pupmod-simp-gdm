@@ -15,6 +15,8 @@
   in metadata.json.
 - simp/pam was added to optional dependencies and is needed if gdm:pam
   is set to true.
+- removed pulseaudio from list of packages because gdm has dependency  on it
+  so it will automatically be installed.
 
 * Thu Dec 17 2020 Chris Tessmer <chris.tessmer@onyxpoint.com> - 7.2.4
 - Removed EL6 support
