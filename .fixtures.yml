@@ -21,7 +21,6 @@ fixtures:
       target: spec/fixtures/inspec_deps/inspec_profiles/profiles
 
     # Fixtures needed for acceptance
-    gnome: https://github.com/simp/pupmod-simp-gnome
     oddjob: https://github.com/simp/pupmod-simp-oddjob
     simp: https://github.com/simp/pupmod-simp-simp
   symlinks:
