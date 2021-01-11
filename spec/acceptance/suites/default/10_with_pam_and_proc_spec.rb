@@ -1,8 +1,8 @@
 require 'spec_helper_acceptance'
 
-test_name 'simp::gdm with gnome and pam and hidepid'
+test_name 'simp::gdm with pam and hidepid'
 
-describe 'simp::gdm with gnome and pam and hidepid' do
+describe 'simp::gdm with pam and hidepid' do
 let(:manifest) {
   <<-EOS
     include 'pam'
