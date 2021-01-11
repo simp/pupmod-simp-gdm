@@ -42,10 +42,14 @@ EOS
         expect(result.stdout).to match(/Active: active \(running\)/)
       end
 
-      # The gdm service may be up and running but it had errors
-      # bring up the greeter so user can log in.  This just checks
-      # if the greeter process is running.  It is started slightly differently in
-      # el7 (dbus) and el8 (gdm-x-session) so just check for greeter.
+      # Check that processes started by the gdm service are
+      # up and running.  Specifically the greeter service which brings up the login
+      # interface for the user.  These later processes can fail because
+      # of permission problems that are caused by security settings in pam and
+      # hide pid.  The gdm module has configuration settings that allow the 
+      # the gdm process to run, such as adding the hidepid group to systemd-logind 
+      # service groups and adding the gdm user to the /etc/security/access file.
+ 
       it 'should be running the greeter' do
         on(host,'pgrep -u gdm -f /*greeter*/')
       end
