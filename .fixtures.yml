@@ -3,15 +3,16 @@ fixtures:
   repositories:
     compliance_markup: https://github.com/simp/pupmod-simp-compliance_markup
     concat: https://github.com/simp/puppetlabs-concat
-    compliance_markup: https://github.com/simp/pupmod-simp-compliance_markup
     dconf: https://github.com/simp/pupmod-simp-dconf
     inifile: https://github.com/simp/puppetlabs-inifile
+    pam: https://github.com/simp/pupmod-simp-pam
     polkit: https://github.com/simp/pupmod-simp-polkit
+    simp_options: https://github.com/simp/pupmod-simp-simp_options
+    simp_banners: https://github.com/simp/pupmod-simp-simp_banners
     simplib: https://github.com/simp/pupmod-simp-simplib
     stdlib: https://github.com/simp/puppetlabs-stdlib
     svckill: https://github.com/simp/pupmod-simp-svckill
-    simp_options: https://github.com/simp/pupmod-simp-simp_options
-    simp_banners: https://github.com/simp/pupmod-simp-simp_banners
+    systemd: https://github.com/simp/puppet-systemd
 
     # For compliance testing
     disa_stig-el7-baseline:
@@ -20,6 +21,7 @@ fixtures:
       target: spec/fixtures/inspec_deps/inspec_profiles/profiles
 
     # Fixtures needed for acceptance
-    gnome: https://github.com/simp/pupmod-simp-gnome
+    oddjob: https://github.com/simp/pupmod-simp-oddjob
+    simp: https://github.com/simp/pupmod-simp-simp
   symlinks:
     gdm: "#{source_dir}"

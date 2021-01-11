@@ -32,6 +32,8 @@ gdm::packages:
   liberation-mono-fonts: ~
   liberation-sans-fonts: ~
   liberation-serif-fonts: ~
+  xorg-x11-utils: ~
+  xorg-x11-docs: ~
 
 gdm::settings:
   chooser:
@@ -54,3 +56,10 @@ gdm::dconf_hash:
     # Do not show the list of available users at login screen
     disable-user-list:
       value: true
+
+gdm::service::services:
+  - accounts-daemon
+  - display-manager
+  - gdm
+  - rtkit-daemon
+  - upower

@@ -21,14 +21,14 @@ describe 'simp::gdm class' do
         on(host, 'yum -y update')
       end
 
-      it 'should work but may have errors' do
-        apply_manifest_on(host, manifest, :allow_all_exit_codes => true)
-      end
-
       it 'should require a reboot and relabel' do
         # This is needed to get the SELinux contexts worked out properly
         on(host, 'touch /.autorelabel')
         host.reboot
+      end
+
+      it 'should work but may have errors' do
+        apply_manifest_on(host, manifest, :allow_all_exit_codes => true)
       end
 
       it 'should require another run' do
@@ -40,13 +40,17 @@ describe 'simp::gdm class' do
         apply_manifest_on(host, manifest, :catch_changes => true)
       end
 
-      it 'should be running GDM' do
-        on(host, 'pgrep -u gdm')
+      it 'should have GDM started' do
+        result = on(host, "systemctl status gdm.service")
+        expect(result.stdout).to match(/Active: active \(running\)/)
+        retry_on(host, 'pgrep -u gdm -f /*greeter*/')
       end
 
       it 'should be running GDM after reboot' do
         host.reboot
-        retry_on(host, 'pgrep -u gdm')
+        retry_on(host, 'pgrep -u gdm -f /*greeter*/')
+        result = on(host, "systemctl status gdm.service")
+        expect(result.stdout).to match(/Active: active \(running\)/)
       end
     end
   end
