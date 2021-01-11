@@ -1,3 +1,23 @@
+* Tue Dec 22 2020 Jeanne Greulich <jeanne.greulich@onyxpoint.com> - 7.3.0
+- Added EL8 support
+- Added check for hidepid on /proc.  If it is on, update the systemd-logind service
+  entry to include the hidepid group as a supplementary group and restart the
+  systemd-logind service.
+- Added pam access entry for gdm user so greeter session can start.
+- Added error message if gdm version older than 3.0 is used.
+- Added the following parameters:
+    gdm::pam  - indicates if pam is controlled by simp.  If this is set to
+                true then a pam access rule is added to allow the gdm user
+                local access to the system. Defaults to simp_options::pam.
+    gdm::display_mgr_user  - the name of the user that the gdm service will run under.
+                Defaults to 'gdm'
+- simp/gnome and simp/auditd were removed from the dependencies
+  in metadata.json.
+- simp/pam was added to optional dependencies and is needed if gdm:pam
+  is set to true.
+- removed pulseaudio from list of packages because gdm has dependency  on it
+  so it will automatically be installed.
+
 * Thu Dec 17 2020 Chris Tessmer <chris.tessmer@onyxpoint.com> - 7.2.4
 - Removed EL6 support
 
