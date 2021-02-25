@@ -64,9 +64,9 @@ checks:
       SRG-OS-000023-GPOS-00006: true
       SRG-OS-000023-GPOS-00007: true
       SRG-OS-000023-GPOS-00008: true
-    identifiers:
       nist_800_53:rev4: true
       nist_800_53:rev4:AC-8:a: true
+    identifiers:
       disa_stig:
       - CCI-000048
       - RHEL-07-010030

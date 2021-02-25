@@ -1,3 +1,6 @@
+* Wed Feb 24 2021 Steven Pritchard <steven.pritchard@onyxpoint.com> - 7.3.0
+- Fix minor error in compliance_markup data
+
 * Tue Dec 22 2020 Jeanne Greulich <jeanne.greulich@onyxpoint.com> - 7.3.0
 - Added EL8 support
 - Added check for hidepid on /proc.  If it is on, update the systemd-logind service
