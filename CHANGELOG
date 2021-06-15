@@ -1,3 +1,7 @@
+* Tue Jun 15 2021 Chris Tessmer <chris.tessmer@onyxpoint.com> - 7.4.0
+- Removed support for Puppet 5
+- Ensured support for Puppet 7 in requirements and stdlib
+
 * Wed Feb 24 2021 Steven Pritchard <steven.pritchard@onyxpoint.com> - 7.3.0
 - Fix minor error in compliance_markup data
 
