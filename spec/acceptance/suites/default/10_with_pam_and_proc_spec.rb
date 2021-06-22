@@ -3,23 +3,24 @@ require 'spec_helper_acceptance'
 test_name 'simp::gdm with pam and hidepid'
 
 describe 'simp::gdm with pam and hidepid' do
-let(:manifest) {
-  <<-EOS
-    include 'pam'
+  let(:manifest) do
+    <<~EOS
+      include 'pam'
 
-    pam::access::rule {'Vagrant User':
-      users => [ 'vagrant' ],
-      origins => ['LOCAL']
-    }
+      pam::access::rule {'Vagrant User':
+        users => [ 'vagrant' ],
+        origins => ['ALL']
+      }
 
-    include 'simp::mountpoints::proc'
-    include 'gdm'
-  EOS
-}
-let(:hieradata){ <<-EOS
-simp_options::pam: true
-EOS
-}
+      include 'simp::mountpoints::proc'
+      include 'gdm'
+    EOS
+  end
+
+  let(:hieradata) do <<~EOS
+    simp_options::pam: true
+    EOS
+  end
 
   hosts.each do |host|
     context "on #{host}" do
@@ -28,6 +29,10 @@ EOS
       end
 
       it 'should work with no errors' do
+        apply_manifest_on(host, manifest, :catch_failures => true)
+
+        # Hidepid triggers a chain of items that have to be hooked together via
+        # facts
         apply_manifest_on(host, manifest, :catch_failures => true)
       end
 
@@ -46,12 +51,12 @@ EOS
       # up and running.  Specifically the greeter service which brings up the login
       # interface for the user.  These later processes can fail because
       # of permission problems that are caused by security settings in pam and
-      # hide pid.  The gdm module has configuration settings that allow the 
-      # the gdm process to run, such as adding the hidepid group to systemd-logind 
+      # hide pid.  The gdm module has configuration settings that allow the
+      # the gdm process to run, such as adding the hidepid group to systemd-logind
       # service groups and adding the gdm user to the /etc/security/access file.
- 
+
       it 'should be running the greeter' do
-        on(host,'pgrep -u gdm -f /*greeter*/')
+        retry_on(host,'pgrep -u gdm -f /*greeter*/')
       end
 
       # Restart GDM service and make sure everything comes back up
@@ -60,10 +65,8 @@ EOS
         sleep 5
         result = on(host, "systemctl status gdm.service")
         expect(result.stdout).to match(/Active: active \(running\)/)
-        on(host,'pgrep -u gdm -f /*greeter*/')
+        retry_on(host,'pgrep -u gdm -f /*greeter*/')
       end
-
     end
   end
-
 end

@@ -13,6 +13,10 @@ describe 'simp::gdm class' do
 
   hosts.each do |host|
     context "on #{host}" do
+      it 'enables epel' do
+        enable_epel_on(host)
+      end
+
       # Work around the issue where the system hangs. I don't quite recall what
       # the issue was here but on some versions of EL7 there was a bug where
       # the system would not allow changing runlevels and would become
