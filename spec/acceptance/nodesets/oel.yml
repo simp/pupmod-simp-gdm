@@ -9,17 +9,19 @@ HOSTS:
   oel7:
     roles:
       - client
-      # roles migrated from now-removed el6 node(s): 
       - default
       - master
     platform:   el-7-x86_64
-    box:        onyxpoint/oel-7-x86_64
+    box:        generic/oracle7
     hypervisor: <%= hypervisor %>
-    yum_repos:
-      epel:
-        mirrorlist: 'https://mirrors.fedoraproject.org/metalink?repo=epel-7&arch=$basearch'
-        gpgkeys:
-          - https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
+
+  oel8:
+    roles:
+      - client
+    platform:   el-8-x86_64
+    box:        generic/oracle8
+    hypervisor: <%= hypervisor %>
+
 CONFIG:
   log_level: verbose
   type: aio
