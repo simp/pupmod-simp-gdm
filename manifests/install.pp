@@ -34,7 +34,7 @@ class gdm::install {
       $_proc_gid = $facts.dig('simplib__mountpoints', '/proc', 'options_hash', 'gid')
 
       if $_proc_gid {
-        simplib::assert_optional_dependency($module_name, 'camptocamp/systemd')
+        simplib::assert_optional_dependency($module_name, 'puppet/systemd')
 
         systemd::dropin_file { "${module_name}_hidepid.conf":
           unit          => 'systemd-logind.service',
