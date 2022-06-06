@@ -125,7 +125,6 @@ describe 'gdm' do
           end
           it { is_expected.to create_systemd__dropin_file('gdm_hidepid.conf').with({
             :unit => "systemd-logind.service",
-            :daemon_reload => 'eager',
             :content => /SupplementaryGroups=231/
             })
           }

@@ -38,7 +38,6 @@ class gdm::install {
 
         systemd::dropin_file { "${module_name}_hidepid.conf":
           unit          => 'systemd-logind.service',
-          daemon_reload => 'eager',
           notify        => Exec['gdm_restart_logind'],
           content       => @("SYSTEMD_OVERRIDE")
             [Service]
