@@ -37,9 +37,9 @@ class gdm::install {
         simplib::assert_optional_dependency($module_name, 'puppet/systemd')
 
         systemd::dropin_file { "${module_name}_hidepid.conf":
-          unit          => 'systemd-logind.service',
-          notify        => Exec['gdm_restart_logind'],
-          content       => @("SYSTEMD_OVERRIDE")
+          unit    => 'systemd-logind.service',
+          notify  => Exec['gdm_restart_logind'],
+          content => @("SYSTEMD_OVERRIDE")
             [Service]
             SupplementaryGroups=${_proc_gid}
             | SYSTEMD_OVERRIDE
