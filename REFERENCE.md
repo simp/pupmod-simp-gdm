@@ -9,8 +9,8 @@
 #### Public Classes
 
 * [`gdm`](#gdm): This class configures, installs, and ensures GDM is running.
-* [`gdm::config`](#gdmconfig): Configuration items for GDM
-* [`gdm::service`](#gdmservice): Ensures the GDM service is properly configured
+* [`gdm::config`](#gdm--config): Configuration items for GDM
+* [`gdm::service`](#gdm--service): Ensures the GDM service is properly configured
 
 #### Private Classes
 
@@ -18,12 +18,12 @@
 
 ### Defined types
 
-* [`gdm::set`](#gdmset): This define allows you to set individual configuration elements in
+* [`gdm::set`](#gdm--set): This define allows you to set individual configuration elements in
 
 ### Data types
 
-* [`Gdm::ConfSection`](#gdmconfsection): Top level sections in /etc/gdm/custom.conf
-* [`Gdm::CustomConf`](#gdmcustomconf): Configuration for /etc/gdm/custom.conf
+* [`Gdm::ConfSection`](#Gdm--ConfSection): Top level sections in /etc/gdm/custom.conf
+* [`Gdm::CustomConf`](#Gdm--CustomConf): Configuration for /etc/gdm/custom.conf
 
 ## Classes
 
@@ -36,25 +36,25 @@
 
 The following parameters are available in the `gdm` class:
 
-* [`dconf_hash`](#dconf_hash)
-* [`packages`](#packages)
-* [`settings`](#settings)
-* [`package_ensure`](#package_ensure)
-* [`include_sec`](#include_sec)
-* [`auditd`](#auditd)
-* [`pam`](#pam)
-* [`display_mgr_user`](#display_mgr_user)
-* [`banner`](#banner)
-* [`simp_banner`](#simp_banner)
-* [`banner_content`](#banner_content)
+* [`dconf_hash`](#-gdm--dconf_hash)
+* [`packages`](#-gdm--packages)
+* [`settings`](#-gdm--settings)
+* [`package_ensure`](#-gdm--package_ensure)
+* [`include_sec`](#-gdm--include_sec)
+* [`auditd`](#-gdm--auditd)
+* [`pam`](#-gdm--pam)
+* [`display_mgr_user`](#-gdm--display_mgr_user)
+* [`banner`](#-gdm--banner)
+* [`simp_banner`](#-gdm--simp_banner)
+* [`banner_content`](#-gdm--banner_content)
 
-##### <a name="dconf_hash"></a>`dconf_hash`
+##### <a name="-gdm--dconf_hash"></a>`dconf_hash`
 
 Data type: `Dconf::SettingsHash`
 
 ``dconf`` settings applicable to GDM
 
-##### <a name="packages"></a>`packages`
+##### <a name="-gdm--packages"></a>`packages`
 
 Data type: `Hash[String[1], Optional[Hash]]`
 
@@ -69,7 +69,7 @@ A Hash of packages to be installed
 
 @see data/common.yaml
 
-##### <a name="settings"></a>`settings`
+##### <a name="-gdm--settings"></a>`settings`
 
 Data type: `Gdm::CustomConf`
 
@@ -89,7 +89,7 @@ validated
     }
   }
 
-##### <a name="package_ensure"></a>`package_ensure`
+##### <a name="-gdm--package_ensure"></a>`package_ensure`
 
 Data type: `Simplib::PackageEnsure`
 
@@ -98,16 +98,16 @@ managed with this module.
 
 Default value: `simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' })`
 
-##### <a name="include_sec"></a>`include_sec`
+##### <a name="-gdm--include_sec"></a>`include_sec`
 
 Data type: `Boolean`
 
 Boolean
 This no longer has any effect
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="auditd"></a>`auditd`
+##### <a name="-gdm--auditd"></a>`auditd`
 
 Data type: `Boolean`
 
@@ -115,7 +115,7 @@ Enable auditd support for this module via the ``simp-auditd`` module
 
 Default value: `simplib::lookup('simp_options::auditd', { 'default_value' => false })`
 
-##### <a name="pam"></a>`pam`
+##### <a name="-gdm--pam"></a>`pam`
 
 Data type: `Boolean`
 
@@ -123,7 +123,7 @@ Enable pam support for this module via the ``simp-pam`` module
 
 Default value: `simplib::lookup('simp_options::pam', { 'default_value' => false })`
 
-##### <a name="display_mgr_user"></a>`display_mgr_user`
+##### <a name="-gdm--display_mgr_user"></a>`display_mgr_user`
 
 Data type: `String[1]`
 
@@ -132,7 +132,7 @@ this user will be given local access to the system to it can start the service.
 
 Default value: `'gdm'`
 
-##### <a name="banner"></a>`banner`
+##### <a name="-gdm--banner"></a>`banner`
 
 Data type: `Boolean`
 
@@ -140,9 +140,9 @@ Enable a login screen banner
 
 * NOTE: any banner settings set via `dconf_hash` will take precedence
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="simp_banner"></a>`simp_banner`
+##### <a name="-gdm--simp_banner"></a>`simp_banner`
 
 Data type: `String[1]`
 
@@ -153,7 +153,7 @@ The name of a banner from the `simp_banners` module that should be used
 
 Default value: `'simp'`
 
-##### <a name="banner_content"></a>`banner_content`
+##### <a name="-gdm--banner_content"></a>`banner_content`
 
 Data type: `Optional[String[1]]`
 
@@ -162,13 +162,13 @@ The full content of the banner, without alteration
 * GDM cannot handle '\n' sequences so any banner will need to have those
   replaced with the literal '\n' string.
 
-Default value: ``undef``
+Default value: `undef`
 
-### <a name="gdmconfig"></a>`gdm::config`
+### <a name="gdm--config"></a>`gdm::config`
 
 Configuration items for GDM
 
-### <a name="gdmservice"></a>`gdm::service`
+### <a name="gdm--service"></a>`gdm::service`
 
 This will **NOT** switch the runlevel by default since this is a potentially
 dangerous activity if graphics drivers are having issues.
@@ -177,9 +177,9 @@ dangerous activity if graphics drivers are having issues.
 
 The following parameters are available in the `gdm::service` class:
 
-* [`services`](#services)
+* [`services`](#-gdm--service--services)
 
-##### <a name="services"></a>`services`
+##### <a name="-gdm--service--services"></a>`services`
 
 Data type: `Optional[Array[String[1]]]`
 
@@ -189,11 +189,11 @@ A list of services relevant to the proper functioning of GDM
   will be used for ensuring that the services are not disabled by the
   `svckill` module if it is present.
 
-Default value: ``undef``
+Default value: `undef`
 
 ## Defined types
 
-### <a name="gdmset"></a>`gdm::set`
+### <a name="gdm--set"></a>`gdm::set`
 
 `/etc/gdm/custom.conf` without explicitly needing to use an `inifile`
 resource.
@@ -207,11 +207,11 @@ For particular configuration parameters, please see:
 
 The following parameters are available in the `gdm::set` defined type:
 
-* [`section`](#section)
-* [`key`](#key)
-* [`value`](#value)
+* [`section`](#-gdm--set--section)
+* [`key`](#-gdm--set--key)
+* [`value`](#-gdm--set--value)
 
-##### <a name="section"></a>`section`
+##### <a name="-gdm--set--section"></a>`section`
 
 Data type: `Gdm::ConfSection`
 
@@ -219,13 +219,13 @@ The section that you wish to manipulate.  Valid values are 'daemon',
 'security','xdmcp', 'gui','greeter', 'chooser', 'debug', 'servers',
 'server-Standard', 'server-Terminal', and 'server-Chooser'
 
-##### <a name="key"></a>`key`
+##### <a name="-gdm--set--key"></a>`key`
 
 Data type: `String`
 
 The actual key value that you wish to change under $section.
 
-##### <a name="value"></a>`value`
+##### <a name="-gdm--set--value"></a>`value`
 
 Data type: `Variant[Boolean,String]`
 
@@ -233,17 +233,13 @@ The value to which $key should be set under $section
 
 ## Data types
 
-### <a name="gdmconfsection"></a>`Gdm::ConfSection`
+### <a name="Gdm--ConfSection"></a>`Gdm::ConfSection`
 
 Top level sections in /etc/gdm/custom.conf
 
-Alias of
+Alias of `Enum['daemon', 'security', 'xdmcp', 'gui', 'greeter', 'chooser', 'debug', 'servers', 'server-Standard', 'server-Terminal', 'server-Chooser']`
 
-```puppet
-Enum['daemon', 'security', 'xdmcp', 'gui', 'greeter', 'chooser', 'debug', 'servers', 'server-Standard', 'server-Terminal', 'server-Chooser']
-```
-
-### <a name="gdmcustomconf"></a>`Gdm::CustomConf`
+### <a name="Gdm--CustomConf"></a>`Gdm::CustomConf`
 
 Configuration for /etc/gdm/custom.conf
 
