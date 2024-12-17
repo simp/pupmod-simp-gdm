@@ -4,7 +4,6 @@ require 'json'
 test_name 'Check Inspec for stig profile'
 
 describe 'run inspec against the appropriate fixtures' do
-
   profiles_to_validate = ['disa_stig']
 
   hosts.each do |host|
@@ -15,26 +14,26 @@ describe 'run inspec against the appropriate fixtures' do
             @inspec = Simp::BeakerHelpers::Inspec.new(host, profile)
 
             # If we don't do this, the variable gets reset
-            @inspec_report = { :data => nil }
+            @inspec_report = { data: nil }
           end
 
-          it 'should run inspec' do
+          it 'runs inspec' do
             @inspec.run
           end
 
-          it 'should have an inspec report' do
+          it 'has an inspec report' do
             @inspec_report[:data] = @inspec.process_inspec_results
 
-            expect(@inspec_report[:data]).to_not be_nil
+            expect(@inspec_report[:data]).not_to be_nil
 
             @inspec.write_report(@inspec_report[:data])
           end
 
-          it 'should have run some tests' do
+          it 'has run some tests' do
             expect(@inspec_report[:data][:failed] + @inspec_report[:data][:passed]).to be > 0
           end
 
-          it 'should not have any failing tests' do
+          it 'does not have any failing tests' do
             # 1 test erroneously fails
             # - 'The system must send rsyslog output to a log aggregation server':
             #    - inspec_profiles/profiles/disa_stig-el7-baseline/controls/V-72209.rb
@@ -44,7 +43,7 @@ describe 'run inspec against the appropriate fixtures' do
               puts @inspec_report[:data][:report]
             end
 
-            expect(@inspec_report[:data][:score] ).to eq(100)
+            expect(@inspec_report[:data][:score]).to eq(100)
           end
         end
       end

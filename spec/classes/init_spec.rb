@@ -12,7 +12,7 @@ describe 'gdm' do
         it { is_expected.to contain_class('gdm::service') }
 
         context 'GDM = 3.0.0' do
-          let(:facts){ os_facts.merge({:runlevel => '5', :gdm_version => '3.14.2'}) }
+          let(:facts) { os_facts.merge({ runlevel: '5', gdm_version: '3.14.2' }) }
 
           context 'default parameters' do
             it { is_expected.to compile.with_all_deps }
@@ -40,16 +40,16 @@ describe 'gdm' do
             it { is_expected.to create_dconf__settings('GDM Dconf Settings') }
             it {
               dconf_resource = catalogue.resource('Dconf::Settings[GDM Dconf Settings]')
-              expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-text']['value']).to match(/ATTENTION/)
+              expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-text']['value']).to match(%r{ATTENTION})
               expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-enable']['value']).to be true
             }
             it {
               is_expected.to create_gdm__set('GDM [chooser] Multicast:false').with(
                 {
-                  :section => 'chooser',
-                  :key     => 'Multicast',
-                  :value   => 'false'
-                }
+                  section: 'chooser',
+                  key: 'Multicast',
+                  value: 'false'
+                },
               )
             }
             it { is_expected.to create_gdm__set('GDM [daemon] TimedLoginEnable:false') }
@@ -61,7 +61,7 @@ describe 'gdm' do
 
           context 'modifying the banner' do
             context 'disable' do
-              let(:params){{ :banner => false }}
+              let(:params) { { banner: false } }
 
               it { is_expected.to compile.with_all_deps }
               it { is_expected.to create_dconf__settings('GDM Dconf Settings') }
@@ -72,9 +72,9 @@ describe 'gdm' do
             end
 
             context 'set new content' do
-              let(:params){{ :banner_content => 'I like banners' }}
-              let(:to_match){ "'I like banners'" }
-              let(:dconf_resource){ catalogue.resource('Dconf::Settings[GDM Dconf Settings]')}
+              let(:params) { { banner_content: 'I like banners' } }
+              let(:to_match) { "'I like banners'" }
+              let(:dconf_resource) { catalogue.resource('Dconf::Settings[GDM Dconf Settings]') }
 
               it { is_expected.to compile.with_all_deps }
               it { is_expected.to create_dconf__settings('GDM Dconf Settings') }
@@ -84,7 +84,8 @@ describe 'gdm' do
               }
 
               context 'with pre-added quotes' do
-                let(:params){{ :banner_content => "I like banners" }}
+                let(:params) { { banner_content: 'I like banners' } }
+
                 it { is_expected.to compile.with_all_deps }
                 it {
                   expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-text']['value']).to eq(to_match)
@@ -93,14 +94,14 @@ describe 'gdm' do
             end
 
             context 'change simp_banner selection' do
-              let(:params){{ :simp_banner => 'us/department_of_commerce' }}
+              let(:params) { { simp_banner: 'us/department_of_commerce' } }
 
               it { is_expected.to compile.with_all_deps }
               it { is_expected.to create_dconf__settings('GDM Dconf Settings') }
               it {
                 dconf_resource = catalogue.resource('Dconf::Settings[GDM Dconf Settings]')
                 expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-enable']['value']).to be true
-                expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-text']['value']).to match(/Department of Commerce/i)
+                expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-text']['value']).to match(%r{Department of Commerce}i)
               }
             end
           end
@@ -110,23 +111,26 @@ describe 'gdm' do
           let(:facts) do
             os_facts.merge(
               {
-                :runlevel => '5',
-                :gdm_version => '3.14.2',
-                :simplib__mountpoints => {
+                runlevel: '5',
+                gdm_version: '3.14.2',
+                simplib__mountpoints: {
                   '/proc' => {
                     'options_hash' => {
                       '_gid__group' => 'proc_access',
                       'gid'         => 231,
-                      'hidepid'     => 2                        }
+                      'hidepid'     => 2
+                    }
                   }
                 }
-              }
+              },
             )
           end
-          it { is_expected.to create_systemd__dropin_file('gdm_hidepid.conf').with({
-            :unit => "systemd-logind.service",
-            :content => /SupplementaryGroups=231/
-            })
+
+          it {
+            is_expected.to create_systemd__dropin_file('gdm_hidepid.conf').with({
+                                                                                  unit: 'systemd-logind.service',
+            content: %r{SupplementaryGroups=231}
+                                                                                })
           }
         end
 
@@ -134,25 +138,27 @@ describe 'gdm' do
           let(:facts) do
             os_facts.merge(
               {
-                :runlevel => '5',
-                :gdm_version => '2.1'
-            })
+                runlevel: '5',
+                gdm_version: '2.1'
+              },
+            )
           end
+
           it { is_expected.to raise_error(Puppet::ParseError) }
         end
 
         context 'with pam enabled' do
-          let(:params){{ :pam => true }}
+          let(:params) { { pam: true } }
 
-          it { is_expected.to create_pam__access__rule('allow_local_display_manager').with({
-            :permission => '+',
-            :users      => ['gdm'],
-            :origins    => ['LOCAL']
-            })
+          it {
+            is_expected.to create_pam__access__rule('allow_local_display_manager').with({
+                                                                                          permission: '+',
+            users: ['gdm'],
+            origins: ['LOCAL']
+                                                                                        })
           }
         end
       end
-
     end
   end
 end
