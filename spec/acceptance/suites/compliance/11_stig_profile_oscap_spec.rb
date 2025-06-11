@@ -5,6 +5,7 @@ test_name 'Check SCAP for stig profile'
 describe 'run the SSG against the appropriate fixtures for stig GDM profile' do
   hosts.each do |host|
     context "on #{host}" do
+      # rubocop:disable RSpec/InstanceVariable
       before(:all) do
         @ssg = Simp::BeakerHelpers::SSG.new(host)
 
@@ -39,6 +40,7 @@ describe 'run the SSG against the appropriate fixtures for stig GDM profile' do
 
         expect(@ssg_report[:data][:score]).to eq(100)
       end
+      # rubocop:enable RSpec/InstanceVariable
     end
   end
 end

@@ -19,7 +19,7 @@ describe 'gdm' do
             it { is_expected.to create_class('gdm') }
             it { is_expected.to contain_simplib__install('gdm packages').that_notifies('Class[gdm::service]') }
             it { is_expected.to contain_simplib__install('gdm packages').that_comes_before('Class[gdm::config]') }
-            @package = [
+            packages = [
               'gdm', 'xorg-x11-drivers', 'xorg-x11-xinit', 'xorg-x11-utils', 'xorg-x11-docs',
               'dejavu-sans-fonts', 'dejavu-sans-mono-fonts', 'dejavu-serif-fonts',
               'bitmap-fixed-fonts', 'bitmap-lucida-typewriter-fonts',
@@ -28,7 +28,7 @@ describe 'gdm' do
               'xorg-x11-fonts-ISO8859-1-75dpi', 'xorg-x11-fonts-Type1', 'xorg-x11-fonts-misc',
               'xorg-x11-server-Xorg'
             ]
-            @package.each do |pkg|
+            packages.each do |pkg|
               it { is_expected.to contain_package(pkg) }
             end
             it { is_expected.to contain_svckill__ignore('gdm') }
