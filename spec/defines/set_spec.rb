@@ -11,15 +11,15 @@ describe 'gdm::set' do
         let(:params) { { section: 'daemon', key: 'Chooser', value: false } }
 
         it {
-          is_expected.to contain_ini_setting("GDM custom config #{title}").with({
-                                                                                  'ensure' => 'present',
+          is_expected.to contain_ini_setting("GDM custom config #{title}").with(
+            'ensure'  => 'present',
             'path'    => '/etc/gdm/custom.conf',
             'section' => params[:section],
             'setting' => params[:key],
             'value'   => params[:value],
             'require' => 'Class[Gdm::Install]',
-            'notify'  => 'Class[Gdm::Service]'
-                                                                                })
+            'notify'  => 'Class[Gdm::Service]',
+          )
         }
       end
     end

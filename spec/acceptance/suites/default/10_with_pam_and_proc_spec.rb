@@ -7,9 +7,9 @@ describe 'simp::gdm with pam and hidepid' do
     <<~EOS
       include 'pam'
 
-      pam::access::rule {'Vagrant User':
-        users => [ 'vagrant' ],
-        origins => ['ALL']
+      pam::access::rule { 'Vagrant User':
+        users   => [ 'vagrant' ],
+        origins => ['ALL'],
       }
 
       include 'simp::mountpoints::proc'
@@ -19,7 +19,7 @@ describe 'simp::gdm with pam and hidepid' do
 
   let(:hieradata) do
     <<~EOS
-    simp_options::pam: true
+      simp_options::pam: true
     EOS
   end
 

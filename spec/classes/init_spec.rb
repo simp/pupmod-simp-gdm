@@ -12,7 +12,12 @@ describe 'gdm' do
         it { is_expected.to contain_class('gdm::service') }
 
         context 'GDM = 3.0.0' do
-          let(:facts) { os_facts.merge({ runlevel: '5', gdm_version: '3.14.2' }) }
+          let(:facts) do
+            os_facts.merge(
+              runlevel: '5',
+              gdm_version: '3.14.2',
+            )
+          end
 
           context 'default parameters' do
             it { is_expected.to compile.with_all_deps }
@@ -45,11 +50,9 @@ describe 'gdm' do
             }
             it {
               is_expected.to create_gdm__set('GDM [chooser] Multicast:false').with(
-                {
-                  section: 'chooser',
-                  key: 'Multicast',
-                  value: 'false'
-                },
+                section: 'chooser',
+                key: 'Multicast',
+                value: 'false',
               )
             }
             it { is_expected.to create_gdm__set('GDM [daemon] TimedLoginEnable:false') }
@@ -110,37 +113,33 @@ describe 'gdm' do
         context 'with hidepid on' do
           let(:facts) do
             os_facts.merge(
-              {
-                runlevel: '5',
-                gdm_version: '3.14.2',
-                simplib__mountpoints: {
-                  '/proc' => {
-                    'options_hash' => {
-                      '_gid__group' => 'proc_access',
-                      'gid'         => 231,
-                      'hidepid'     => 2
-                    }
-                  }
-                }
+              runlevel: '5',
+              gdm_version: '3.14.2',
+              simplib__mountpoints: {
+                '/proc' => {
+                  'options_hash' => {
+                    '_gid__group' => 'proc_access',
+                    'gid'         => 231,
+                    'hidepid'     => 2,
+                  },
+                },
               },
             )
           end
 
           it {
-            is_expected.to create_systemd__dropin_file('gdm_hidepid.conf').with({
-                                                                                  unit: 'systemd-logind.service',
-            content: %r{SupplementaryGroups=231}
-                                                                                })
+            is_expected.to create_systemd__dropin_file('gdm_hidepid.conf').with(
+              unit: 'systemd-logind.service',
+              content: %r{SupplementaryGroups=231},
+            )
           }
         end
 
         context 'with old version on GDM' do
           let(:facts) do
             os_facts.merge(
-              {
-                runlevel: '5',
-                gdm_version: '2.1'
-              },
+              runlevel: '5',
+              gdm_version: '2.1',
             )
           end
 
@@ -151,11 +150,11 @@ describe 'gdm' do
           let(:params) { { pam: true } }
 
           it {
-            is_expected.to create_pam__access__rule('allow_local_display_manager').with({
-                                                                                          permission: '+',
-            users: ['gdm'],
-            origins: ['LOCAL']
-                                                                                        })
+            is_expected.to create_pam__access__rule('allow_local_display_manager').with(
+              permission: '+',
+              users: ['gdm'],
+              origins: ['LOCAL'],
+            )
           }
         end
       end

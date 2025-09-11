@@ -4,7 +4,7 @@ test_name 'simp::gdm class STIG'
 
 describe 'simp::gdm class STIG' do
   let(:manifest) do
-    <<-EOS
+    <<~EOS
       include 'gdm'
 
       runlevel { 'graphical': }
@@ -12,27 +12,27 @@ describe 'simp::gdm class STIG' do
   end
 
   let(:hieradata) do
-    <<-EOM
----
-compliance_markup::enforcement:
-  - disa_stig
+    <<~EOM
+      ---
+      compliance_markup::enforcement:
+        - disa_stig
     EOM
   end
 
   hosts.each do |host|
     context "on #{host}" do
       let(:hiera_yaml) do
-        <<-EOM
----
-version: 5
-hierarchy:
-  - name: Common
-    path: common.yaml
-  - name: Compliance
-    lookup_key: compliance_markup::enforcement
-defaults:
-  data_hash: yaml_data
-  datadir: "#{hiera_datadir(host)}"
+        <<~EOM
+          ---
+          version: 5
+          hierarchy:
+            - name: Common
+              path: common.yaml
+            - name: Compliance
+              lookup_key: compliance_markup::enforcement
+          defaults:
+            data_hash: yaml_data
+            datadir: "#{hiera_datadir(host)}"
         EOM
       end
 

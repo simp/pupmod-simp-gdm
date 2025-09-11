@@ -4,7 +4,7 @@ test_name 'simp::gdm class'
 
 describe 'simp::gdm class' do
   let(:manifest) do
-    <<-EOS
+    <<~EOS
       include 'gdm'
 
       runlevel { 'graphical': }
