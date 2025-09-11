@@ -1,3 +1,7 @@
+* Thu Sep 11 2025 Steven Pritchard <steve@sicura.us> - 7.11.0
+- Clean up for rubocop
+- Support simp-dconf 1.x and puppet-systemd 9.x
+
 * Fri Sep 13 2024 Steven Pritchard <steve@sicura.us> - 7.10.0
 - [puppetsync] Update module dependencies to support simp-iptables 7.x
 

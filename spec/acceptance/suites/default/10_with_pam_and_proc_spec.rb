@@ -7,9 +7,9 @@ describe 'simp::gdm with pam and hidepid' do
     <<~EOS
       include 'pam'
 
-      pam::access::rule {'Vagrant User':
-        users => [ 'vagrant' ],
-        origins => ['ALL']
+      pam::access::rule { 'Vagrant User':
+        users   => [ 'vagrant' ],
+        origins => ['ALL'],
       }
 
       include 'simp::mountpoints::proc'
@@ -17,34 +17,35 @@ describe 'simp::gdm with pam and hidepid' do
     EOS
   end
 
-  let(:hieradata) do <<~EOS
-    simp_options::pam: true
+  let(:hieradata) do
+    <<~EOS
+      simp_options::pam: true
     EOS
   end
 
   hosts.each do |host|
     context "on #{host}" do
-      it 'should set_up pam through hiera' do
-         set_hieradata_on(host, hieradata)
+      it 'set_ups pam through hiera' do
+        set_hieradata_on(host, hieradata)
       end
 
-      it 'should work with no errors' do
-        apply_manifest_on(host, manifest, :catch_failures => true)
+      it 'works with no errors' do
+        apply_manifest_on(host, manifest, catch_failures: true)
 
         # Hidepid triggers a chain of items that have to be hooked together via
         # facts
-        apply_manifest_on(host, manifest, :catch_failures => true)
+        apply_manifest_on(host, manifest, catch_failures: true)
       end
 
       # check that hide pid was set on the /proc file system
-      it 'should have hidepid on /proc' do
+      it 'has hidepid on /proc' do
         on(host, 'grep \'proc /proc\' /proc/mounts| grep hidepid=2')
       end
 
       # After this, you can try the GUI and see what happens
-      it 'should have GDM started' do
-        result = on(host, "systemctl status gdm.service")
-        expect(result.stdout).to match(/Active: active \(running\)/)
+      it 'has GDM started' do
+        result = on(host, 'systemctl status gdm.service')
+        expect(result.stdout).to match(%r{Active: active \(running\)})
       end
 
       # Check that processes started by the gdm service are
@@ -55,17 +56,17 @@ describe 'simp::gdm with pam and hidepid' do
       # the gdm process to run, such as adding the hidepid group to systemd-logind
       # service groups and adding the gdm user to the /etc/security/access file.
 
-      it 'should be running the greeter' do
-        retry_on(host,'pgrep -u gdm -f /*greeter*/')
+      it 'is running the greeter' do
+        retry_on(host, 'pgrep -u gdm -f /*greeter*/')
       end
 
       # Restart GDM service and make sure everything comes back up
-      it 'should restart gdm' do
-        on(host, "systemctl restart gdm.service")
+      it 'restarts gdm' do
+        on(host, 'systemctl restart gdm.service')
         sleep 5
-        result = on(host, "systemctl status gdm.service")
-        expect(result.stdout).to match(/Active: active \(running\)/)
-        retry_on(host,'pgrep -u gdm -f /*greeter*/')
+        result = on(host, 'systemctl status gdm.service')
+        expect(result.stdout).to match(%r{Active: active \(running\)})
+        retry_on(host, 'pgrep -u gdm -f /*greeter*/')
       end
     end
   end
