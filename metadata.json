@@ -1,6 +1,6 @@
 {
   "name": "simp-gdm",
-  "version": "7.10.0",
+  "version": "7.11.0",
   "author": "SIMP Team",
   "summary": "manages GDM",
   "license": "Apache-2.0",
@@ -20,7 +20,7 @@
     },
     {
       "name": "simp/dconf",
-      "version_requirement": ">= 0.0.1 < 1.0.0"
+      "version_requirement": ">= 0.0.1 < 2.0.0"
     },
     {
       "name": "simp/simplib",
@@ -39,7 +39,7 @@
     "optional_dependencies": [
       {
         "name": "puppet/systemd",
-        "version_requirement": ">= 4.0.2 < 8.0.0"
+        "version_requirement": ">= 4.0.2 < 10.0.0"
       },
       {
         "name": "simp/pam",
