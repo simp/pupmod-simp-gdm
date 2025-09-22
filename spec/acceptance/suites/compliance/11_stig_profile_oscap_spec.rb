@@ -34,7 +34,7 @@ describe 'run the SSG against the appropriate fixtures for stig GDM profile' do
       it 'does not have any failing tests' do
         pending 'See https://simp-project.atlassian.net/browse/SIMP-6825'
 
-        if @ssg_report[:data][:failed].count > 0
+        if @ssg_report[:data][:failed].any?
           puts @ssg_report[:data][:report]
         end
 
