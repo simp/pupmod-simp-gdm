@@ -1,7 +1,6 @@
 ---
 fixtures:
   repositories:
-    compliance_markup: https://github.com/simp/pupmod-simp-compliance_markup.git
     concat: https://github.com/simp/puppetlabs-concat.git
     dconf: https://github.com/simp/pupmod-simp-dconf.git
     inifile: https://github.com/simp/puppetlabs-inifile.git
