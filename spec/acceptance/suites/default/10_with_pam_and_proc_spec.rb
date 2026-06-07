@@ -45,7 +45,7 @@ describe 'simp::gdm with pam and hidepid' do
       # After this, you can try the GUI and see what happens
       it 'has GDM started' do
         result = on(host, 'systemctl status gdm.service')
-        expect(result.stdout).to match(%r{Active: active \(running\)})
+        expect(result.stdout).to include('Active: active (running)')
       end
 
       # Check that processes started by the gdm service are
@@ -65,7 +65,7 @@ describe 'simp::gdm with pam and hidepid' do
         on(host, 'systemctl restart gdm.service')
         sleep 5
         result = on(host, 'systemctl status gdm.service')
-        expect(result.stdout).to match(%r{Active: active \(running\)})
+        expect(result.stdout).to include('Active: active (running)')
         retry_on(host, 'pgrep -u gdm -f /*greeter*/')
       end
     end

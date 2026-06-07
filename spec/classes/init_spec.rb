@@ -45,7 +45,7 @@ describe 'gdm' do
             it { is_expected.to create_dconf__settings('GDM Dconf Settings') }
             it {
               dconf_resource = catalogue.resource('Dconf::Settings[GDM Dconf Settings]')
-              expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-text']['value']).to match(%r{ATTENTION})
+              expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-text']['value']).to include('ATTENTION')
               expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-enable']['value']).to be true
             }
             it {
