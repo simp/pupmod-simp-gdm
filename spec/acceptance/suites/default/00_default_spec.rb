@@ -46,7 +46,7 @@ describe 'simp::gdm class' do
 
       it 'has GDM started' do
         result = on(host, 'systemctl status gdm.service')
-        expect(result.stdout).to match(%r{Active: active \(running\)})
+        expect(result.stdout).to include('Active: active (running)')
         retry_on(host, 'pgrep -u gdm -f /*greeter*/')
       end
 
@@ -54,7 +54,7 @@ describe 'simp::gdm class' do
         host.reboot
         retry_on(host, 'pgrep -u gdm -f /*greeter*/')
         result = on(host, 'systemctl status gdm.service')
-        expect(result.stdout).to match(%r{Active: active \(running\)})
+        expect(result.stdout).to include('Active: active (running)')
       end
     end
   end
