@@ -28,9 +28,12 @@ class gdm::install {
 
   # Allow systemd-logind to see  files in /proc
   if 'systemd' in pick($facts.dig('init_systems') , []) {
-    # If hidepid is set > 0 and a GID is set, then the systemd-logind service
-    # must have that GID added to its supplementary groups at start time
-    if pick($facts.dig('simplib__mountpoints', '/proc', 'options_hash', 'hidepid'), 0) > 0 {
+    # If hidepid is enabled and a GID is set, then the systemd-logind service
+    # must have that GID added to its supplementary groups at start time.
+    # Depending on the kernel/util-linux version, the fact reports hidepid
+    # either numerically (1, 2) or by name ('noaccess', 'invisible').
+    $_hidepid = pick($facts.dig('simplib__mountpoints', '/proc', 'options_hash', 'hidepid'), 0)
+    if ($_hidepid =~ Integer and $_hidepid > 0) or ($_hidepid in ['noaccess', 'invisible']) {
       $_proc_gid = $facts.dig('simplib__mountpoints', '/proc', 'options_hash', 'gid')
 
       if $_proc_gid {

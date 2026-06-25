@@ -1,0 +1,7 @@
+---
+# Packages still present in the EL9 repositories that have been dropped from
+# EL10. (bitmap-*-fonts and xorg-x11-docs are already gone in EL9.)
+gdm::packages:
+  xorg-x11-drivers: ~
+  xorg-x11-server-Xorg: ~
+  xorg-x11-utils: ~

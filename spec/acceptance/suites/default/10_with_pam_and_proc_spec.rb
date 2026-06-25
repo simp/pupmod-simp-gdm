@@ -37,9 +37,10 @@ describe 'simp::gdm with pam and hidepid' do
         apply_manifest_on(host, manifest, catch_failures: true)
       end
 
-      # check that hide pid was set on the /proc file system
+      # check that hide pid was set on the /proc file system. Newer kernels
+      # report the option by name ('invisible') rather than numerically ('2').
       it 'has hidepid on /proc' do
-        on(host, 'grep \'proc /proc\' /proc/mounts| grep hidepid=2')
+        on(host, 'grep \'proc /proc\' /proc/mounts | grep -E \'hidepid=(2|invisible)\'')
       end
 
       # After this, you can try the GUI and see what happens

@@ -33,8 +33,24 @@ describe 'gdm' do
               'xorg-x11-fonts-ISO8859-1-75dpi', 'xorg-x11-fonts-Type1', 'xorg-x11-fonts-misc',
               'xorg-x11-server-Xorg'
             ]
-            packages.each do |pkg|
+
+            # Some legacy X11/font packages have been dropped from newer EL
+            # repositories; they are only added back on the releases that still
+            # ship them (see data/os/).
+            os_major = os_facts[:os][:release][:major].to_i
+            removed_by_version = {
+              9  => ['bitmap-fixed-fonts', 'bitmap-lucida-typewriter-fonts', 'xorg-x11-docs'],
+              10 => ['bitmap-fixed-fonts', 'bitmap-lucida-typewriter-fonts', 'xorg-x11-docs',
+                     'xorg-x11-drivers', 'xorg-x11-server-Xorg', 'xorg-x11-utils'],
+            }
+            removed = removed_by_version.fetch(os_major, [])
+
+            (packages - removed).each do |pkg|
               it { is_expected.to contain_package(pkg) }
+            end
+
+            removed.each do |pkg|
+              it { is_expected.not_to contain_package(pkg) }
             end
             it { is_expected.to contain_svckill__ignore('gdm') }
             it { is_expected.to contain_svckill__ignore('display-manager') }
@@ -110,29 +126,54 @@ describe 'gdm' do
           end
         end
 
-        context 'with hidepid on' do
-          let(:facts) do
-            os_facts.merge(
-              runlevel: '5',
-              gdm_version: '3.14.2',
-              simplib__mountpoints: {
-                '/proc' => {
-                  'options_hash' => {
-                    '_gid__group' => 'proc_access',
-                    'gid'         => 231,
-                    'hidepid'     => 2,
+        # The simplib__mountpoints fact reports hidepid numerically (older
+        # kernels) or by name (newer kernels); gid is always numeric.
+        [2, 1, 'invisible', 'noaccess'].each do |hidepid|
+          context "with hidepid reported as #{hidepid.inspect}" do
+            let(:facts) do
+              os_facts.merge(
+                runlevel: '5',
+                gdm_version: '3.14.2',
+                simplib__mountpoints: {
+                  '/proc' => {
+                    'options_hash' => {
+                      '_gid__group' => 'proc_access',
+                      'gid'         => 231,
+                      'hidepid'     => hidepid,
+                    },
                   },
                 },
-              },
-            )
-          end
+              )
+            end
 
-          it {
-            is_expected.to create_systemd__dropin_file('gdm_hidepid.conf').with(
-              unit: 'systemd-logind.service',
-              content: %r{SupplementaryGroups=231},
-            )
-          }
+            it {
+              is_expected.to create_systemd__dropin_file('gdm_hidepid.conf').with(
+                unit: 'systemd-logind.service',
+                content: %r{SupplementaryGroups=231},
+              )
+            }
+          end
+        end
+
+        [0, 'off'].each do |hidepid|
+          context "with hidepid disabled (#{hidepid.inspect})" do
+            let(:facts) do
+              os_facts.merge(
+                runlevel: '5',
+                gdm_version: '3.14.2',
+                simplib__mountpoints: {
+                  '/proc' => {
+                    'options_hash' => {
+                      'gid'     => 231,
+                      'hidepid' => hidepid,
+                    },
+                  },
+                },
+              )
+            end
+
+            it { is_expected.not_to create_systemd__dropin_file('gdm_hidepid.conf') }
+          end
         end
 
         context 'with old version on GDM' do
