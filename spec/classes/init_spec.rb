@@ -135,8 +135,9 @@ describe 'gdm' do
                 '/proc' => {
                   'options_hash' => {
                     '_gid__group' => 'proc_access',
-                    'gid'         => 231,
-                    'hidepid'     => 2,
+                    # The fact reports these as Strings on a real system
+                    'gid'         => '231',
+                    'hidepid'     => '2',
                   },
                 },
               },
