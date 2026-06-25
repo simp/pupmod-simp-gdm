@@ -1,0 +1,10 @@
+---
+# Legacy X11/font packages that are still present in the EL8 repositories but
+# have been dropped from later releases.
+gdm::packages:
+  bitmap-fixed-fonts: ~
+  bitmap-lucida-typewriter-fonts: ~
+  xorg-x11-docs: ~
+  xorg-x11-drivers: ~
+  xorg-x11-server-Xorg: ~
+  xorg-x11-utils: ~

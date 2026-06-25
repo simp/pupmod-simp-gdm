@@ -33,8 +33,24 @@ describe 'gdm' do
               'xorg-x11-fonts-ISO8859-1-75dpi', 'xorg-x11-fonts-Type1', 'xorg-x11-fonts-misc',
               'xorg-x11-server-Xorg'
             ]
-            packages.each do |pkg|
+
+            # Some legacy X11/font packages have been dropped from newer EL
+            # repositories; they are only added back on the releases that still
+            # ship them (see data/os/).
+            os_major = os_facts[:os][:release][:major].to_i
+            removed_by_version = {
+              9  => ['bitmap-fixed-fonts', 'bitmap-lucida-typewriter-fonts', 'xorg-x11-docs'],
+              10 => ['bitmap-fixed-fonts', 'bitmap-lucida-typewriter-fonts', 'xorg-x11-docs',
+                     'xorg-x11-drivers', 'xorg-x11-server-Xorg', 'xorg-x11-utils'],
+            }
+            removed = removed_by_version.fetch(os_major, [])
+
+            (packages - removed).each do |pkg|
               it { is_expected.to contain_package(pkg) }
+            end
+
+            removed.each do |pkg|
+              it { is_expected.not_to contain_package(pkg) }
             end
             it { is_expected.to contain_svckill__ignore('gdm') }
             it { is_expected.to contain_svckill__ignore('display-manager') }

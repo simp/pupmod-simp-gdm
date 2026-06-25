@@ -13,6 +13,8 @@ lookup_options:
       strategy: deep
       knockout_prefix: --
 
+# Packages available across all supported EL releases. Packages that have been
+# dropped from newer EL repositories are added back per-release in data/os/.
 gdm::packages:
   gdm: ~
   xorg-x11-fonts-100dpi: ~
@@ -21,19 +23,13 @@ gdm::packages:
   xorg-x11-fonts-ISO8859-1-75dpi: ~
   xorg-x11-fonts-Type1: ~
   xorg-x11-fonts-misc: ~
-  xorg-x11-server-Xorg: ~
-  xorg-x11-drivers: ~
   xorg-x11-xinit: ~
   dejavu-sans-fonts: ~
   dejavu-sans-mono-fonts: ~
   dejavu-serif-fonts: ~
-  bitmap-fixed-fonts: ~
-  bitmap-lucida-typewriter-fonts: ~
   liberation-mono-fonts: ~
   liberation-sans-fonts: ~
   liberation-serif-fonts: ~
-  xorg-x11-utils: ~
-  xorg-x11-docs: ~
 
 gdm::settings:
   chooser:
