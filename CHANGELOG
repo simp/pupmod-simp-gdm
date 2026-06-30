@@ -1,3 +1,7 @@
+* Tue Jun 30 2026 Mike Riddle <mike@sicura.us>
+- Added xorg-x11-server-common package to the package list to ensure
+  the resource is managed.
+
 * Thu Jun 25 2026 Steven Pritchard <steven.pritchard@gmail.com> - 8.0.0
 - Only install the legacy X11/font packages on the EL releases that still ship
   them. `bitmap-fixed-fonts`, `bitmap-lucida-typewriter-fonts`, and
