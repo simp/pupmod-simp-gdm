@@ -157,7 +157,7 @@ describe 'gdm' do
             # user must also be a member of the /proc access group.
             it {
               is_expected.to contain_user('gdm').with(
-                groups: ['231'],
+                groups: ['proc_access'],
                 membership: 'minimum',
               )
             }
