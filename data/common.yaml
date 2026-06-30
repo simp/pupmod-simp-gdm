@@ -30,6 +30,8 @@ gdm::packages:
   liberation-mono-fonts: ~
   liberation-sans-fonts: ~
   liberation-serif-fonts: ~
+  tuned: ~
+  tuned-ppd: ~
 
 gdm::settings:
   chooser:
