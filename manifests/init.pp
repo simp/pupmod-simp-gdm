@@ -86,6 +86,10 @@ class gdm (
 ) {
   simplib::assert_metadata($module_name)
 
+  # Installing gdm requires tuned-ppd, which also requires tuned.
+  # We are including tuned here to ensure that the tuned package resource
+  # is managed and protected from automated DISA STIG remediation.
+  include tuned
   include gdm::install
   include gdm::config
   include gdm::service
