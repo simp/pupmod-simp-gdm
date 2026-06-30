@@ -27,6 +27,10 @@
       "version_requirement": ">= 4.9.0 < 6.0.0"
     },
     {
+      "name": "simp/tuned",
+      "version_requirement": ">= 1.0.0 < 2.0.0"
+    },
+    {
       "name": "puppetlabs/inifile",
       "version_requirement": ">= 2.5.0 < 7.0.0"
     },

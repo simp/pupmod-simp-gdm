@@ -1,6 +1,7 @@
 * Tue Jun 30 2026 Mike Riddle <mike@sicura.us> - 8.0.2
-- Added the `tuned` and `tuned-ppd` packages to the packagelist to ensure
-  the resource is managed.
+- Including the `tuned` class to ensure the tuned package is
+  protected from automated remediation when the `gdm` class is
+  included in the catalog.
 
 * Tue Jun 30 2026 Mike Riddle <mike@sicura.us> - 8.0.1
 - Added the `xorg-x11-server-common` package to the package list to ensure
