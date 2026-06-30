@@ -1,4 +1,4 @@
-* Tue Jun 30 2026 Mike Riddle <mike@sicura.us>
+* Tue Jun 30 2026 Mike Riddle <mike@sicura.us> - 8.0.1
 - Added xorg-x11-server-common package to the package list to ensure
   the resource is managed.
 
