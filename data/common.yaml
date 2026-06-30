@@ -17,7 +17,6 @@ lookup_options:
 # dropped from newer EL repositories are added back per-release in data/os/.
 gdm::packages:
   gdm: ~
-  xorg-x11-server-common: ~
   xorg-x11-fonts-100dpi: ~
   xorg-x11-fonts-75dpi: ~
   xorg-x11-fonts-ISO8859-1-100dpi: ~

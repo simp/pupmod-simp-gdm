@@ -54,6 +54,16 @@ class gdm::install {
           refreshonly => true,
           path        => ['/usr/sbin','/usr/bin']
         }
+
+        # The login greeter runs in a session owned by the display manager
+        # user. When hidepid is enabled, that user must also belong to the
+        # /proc access group, otherwise the greeter cannot read /proc and
+        # fails to start (the greeter session dies immediately on EL9+).
+        user { $gdm::display_mgr_user:
+          groups     => [String($_proc_gid)],
+          membership => 'minimum',
+          require    => Simplib::Install['gdm packages'],
+        }
       }
     }
   }
