@@ -152,6 +152,15 @@ describe 'gdm' do
                 content: %r{SupplementaryGroups=231},
               )
             }
+
+            # The greeter session runs as the display manager user, so that
+            # user must also be a member of the /proc access group.
+            it {
+              is_expected.to contain_user('gdm').with(
+                groups: ['proc_access'],
+                membership: 'minimum',
+              )
+            }
           end
         end
 
@@ -173,6 +182,7 @@ describe 'gdm' do
             end
 
             it { is_expected.not_to create_systemd__dropin_file('gdm_hidepid.conf') }
+            it { is_expected.not_to contain_user('gdm') }
           end
         end
 

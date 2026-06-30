@@ -7,4 +7,5 @@ gdm::packages:
   xorg-x11-docs: ~
   xorg-x11-drivers: ~
   xorg-x11-server-Xorg: ~
+  xorg-x11-server-common: ~
   xorg-x11-utils: ~

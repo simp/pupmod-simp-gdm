@@ -34,7 +34,8 @@ class gdm::install {
     # either numerically (1, 2) or by name ('noaccess', 'invisible').
     $_hidepid = pick($facts.dig('simplib__mountpoints', '/proc', 'options_hash', 'hidepid'), 0)
     if ($_hidepid =~ Integer and $_hidepid > 0) or ($_hidepid in ['noaccess', 'invisible']) {
-      $_proc_gid = $facts.dig('simplib__mountpoints', '/proc', 'options_hash', 'gid')
+      $_proc_gid   = $facts.dig('simplib__mountpoints', '/proc', 'options_hash', 'gid')
+      $_proc_group = $facts.dig('simplib__mountpoints', '/proc', 'options_hash', '_gid__group')
 
       if $_proc_gid {
         simplib::assert_optional_dependency($module_name, 'puppet/systemd')
@@ -53,6 +54,21 @@ class gdm::install {
           command     => 'systemctl restart systemd-logind',
           refreshonly => true,
           path        => ['/usr/sbin','/usr/bin']
+        }
+
+        # The login greeter runs in a session owned by the display manager
+        # user. When hidepid is enabled, that user must also belong to the
+        # /proc access group, otherwise the greeter cannot read /proc and
+        # fails to start (the greeter session dies immediately on EL9+).
+        #
+        # The group name only resolves once the group itself exists, so this
+        # converges on a subsequent run, like the rest of the hidepid setup.
+        if $_proc_group {
+          user { $gdm::display_mgr_user:
+            groups     => [$_proc_group],
+            membership => 'minimum',
+            require    => Simplib::Install['gdm packages'],
+          }
         }
       }
     }

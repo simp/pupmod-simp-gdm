@@ -1,3 +1,11 @@
+* Tue Jun 30 2026 Mike Riddle <mike@sicura.us> - 8.0.1
+- Added the `xorg-x11-server-common` package to the package list to ensure
+  the resource is managed. It is only installed on the EL releases that still
+  ship it (EL8 and EL9); the X.Org server was removed in EL10.
+- Added the display manager user to the `/proc` access group when `hidepid` is
+  enabled. The login greeter runs in a session owned by that user and could not
+  read `/proc` under `hidepid`, causing the greeter to fail to start on EL9+.
+
 * Thu Jun 25 2026 Steven Pritchard <steven.pritchard@gmail.com> - 8.0.0
 - Only install the legacy X11/font packages on the EL releases that still ship
   them. `bitmap-fixed-fonts`, `bitmap-lucida-typewriter-fonts`, and
