@@ -1,3 +1,16 @@
+* Wed Jul 01 2026 Mike Riddle <mike@sicura.us> - 8.1.0
+- Added the `gdm::dconf_db` parameter to make the `dconf` database that GDM
+  settings are written to configurable. It defaults to `gdm` to preserve the
+  module's historical behavior. Setting it to a database that common scanners
+  inspect (such as `local`, `site`, or `distro`) aids DISA STIG remediation;
+  the GDM profile is updated to source the selected database automatically so
+  the login screen continues to inherit the settings.
+- Added the `gdm::key_val_separator` parameter to make the separator used for
+  settings written to `/etc/gdm/custom.conf` configurable. It defaults to
+  ` = ` to preserve the historical output of the `puppetlabs/inifile` module.
+  Setting it to `=` (no surrounding whitespace) satisfies strict scanner
+  checks such as the DISA STIG OVAL check for `AutomaticLoginEnable`.
+
 * Tue Jun 30 2026 Mike Riddle <mike@sicura.us> - 8.0.2
 - Including the `tuned` class to ensure the tuned package is
   protected from automated remediation when the `gdm` class is

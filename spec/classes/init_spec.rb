@@ -64,6 +64,17 @@ describe 'gdm' do
               expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-text']['value']).to include('ATTENTION')
               expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-enable']['value']).to be true
             }
+
+            # By default settings land in the `gdm` database and the `gdm`
+            # profile sources it via a `system-db` entry.
+            it { is_expected.to create_dconf__settings('GDM Dconf Settings').with_profile('gdm') }
+            it {
+              is_expected.to create_dconf__profile('gdm').with_entries(
+                'user'                                  => { 'type' => 'user', 'order' => 1 },
+                'gdm'                                   => { 'type' => 'system' },
+                '/usr/share/gdm/greeter-dconf-defaults' => { 'type' => 'file', 'order' => 99 },
+              )
+            }
             it {
               is_expected.to create_gdm__set('GDM [chooser] Multicast:false').with(
                 section: 'chooser',
@@ -123,6 +134,26 @@ describe 'gdm' do
                 expect(dconf_resource[:settings_hash]['org/gnome/login-screen']['banner-message-text']['value']).to match(%r{Department of Commerce}i)
               }
             end
+          end
+
+          context 'with a custom dconf_db' do
+            let(:params) { { dconf_db: 'local' } }
+
+            it { is_expected.to compile.with_all_deps }
+
+            # Settings are written to the configured database so that scanners
+            # inspecting `local.d`/`site.d`/`distro.d` observe them.
+            it { is_expected.to create_dconf__settings('GDM Dconf Settings').with_profile('local') }
+
+            # The GDM profile sources the configured database so the login
+            # screen still inherits the settings.
+            it {
+              is_expected.to create_dconf__profile('gdm').with_entries(
+                'user'                                  => { 'type' => 'user', 'order' => 1 },
+                'local'                                 => { 'type' => 'system' },
+                '/usr/share/gdm/greeter-dconf-defaults' => { 'type' => 'file', 'order' => 99 },
+              )
+            }
           end
         end
 
