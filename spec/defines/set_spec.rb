@@ -12,15 +12,24 @@ describe 'gdm::set' do
 
         it {
           is_expected.to contain_ini_setting("GDM custom config #{title}").with(
-            'ensure'  => 'present',
-            'path'    => '/etc/gdm/custom.conf',
-            'section' => params[:section],
-            'setting' => params[:key],
-            'value'   => params[:value],
-            'require' => 'Class[Gdm::Install]',
-            'notify'  => 'Class[Gdm::Service]',
+            'ensure'            => 'present',
+            'path'              => '/etc/gdm/custom.conf',
+            'section'           => params[:section],
+            'setting'           => params[:key],
+            'value'             => params[:value],
+            'key_val_separator' => ' = ',
+            'require'           => 'Class[Gdm::Install]',
+            'notify'            => 'Class[Gdm::Service]',
           )
         }
+
+        context 'with a custom key_val_separator' do
+          let(:params) { super().merge(key_val_separator: '=') }
+
+          it {
+            is_expected.to contain_ini_setting("GDM custom config #{title}").with_key_val_separator('=')
+          }
+        end
       end
     end
   end

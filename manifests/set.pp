@@ -18,23 +18,32 @@
 # @param value
 #   The value to which $key should be set under $section
 #
+# @param key_val_separator
+#   The character(s) placed between the key and value in
+#   `/etc/gdm/custom.conf`.
+#
+#   * Defaults to ` = `, matching the historical output of the
+#     `puppetlabs/inifile` module
+#
 # @author Trevor Vaughan <tvaughan@onyxpoint.com>
 #
 define gdm::set (
   Gdm::ConfSection        $section,
   String                  $key,
-  Variant[Boolean,String] $value
+  Variant[Boolean,String] $value,
+  String[1]               $key_val_separator = ' = '
 ) {
 
   include 'gdm'
 
   ini_setting { "GDM custom config ${name}":
-    ensure  => 'present',
-    path    => '/etc/gdm/custom.conf',
-    section => $section,
-    setting => $key,
-    value   => $value,
-    require => Class['gdm::install'],
-    notify  => Class['gdm::service']
+    ensure            => 'present',
+    path              => '/etc/gdm/custom.conf',
+    section           => $section,
+    setting           => $key,
+    value             => $value,
+    key_val_separator => $key_val_separator,
+    require           => Class['gdm::install'],
+    notify            => Class['gdm::service']
   }
 }

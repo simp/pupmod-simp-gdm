@@ -6,6 +6,17 @@
 #  @see dconf(5)
 #  @see data/common.yaml
 #
+# @param dconf_db
+#   The ``dconf`` database (under ``/etc/dconf/db``) that this module's GDM
+#   settings are written to and that the GDM profile sources via a
+#   ``system-db`` entry.
+#
+#   * Defaults to ``gdm`` to preserve the module's historical behavior
+#   * Set to a database that common scanners inspect (such as ``local``,
+#     ``site``, or ``distro``) when performing DISA STIG remediation. The GDM
+#     profile is updated to include the selected database automatically so the
+#     login screen continues to inherit these settings.
+#
 # @param packages
 #   A Hash of packages to be installed
 #
@@ -17,6 +28,15 @@
 #     { 'gdm' => { 'ensure' => '1.2.3' } }
 #
 #   @see data/common.yaml
+#
+# @param key_val_separator
+#   The character(s) placed between the key and value for settings written to
+#   `/etc/gdm/custom.conf`.
+#
+#   * Defaults to ` = ` to preserve the historical output of the
+#     `puppetlabs/inifile` module
+#   * Set to `=` (no surrounding whitespace) to satisfy strict scanner checks
+#     such as the DISA STIG OVAL check for `AutomaticLoginEnable`
 #
 # @param settings
 #   A Hash of settings that will be applied to `/etc/gdm/custom.conf`
@@ -75,14 +95,16 @@ class gdm (
   Dconf::SettingsHash             $dconf_hash,
   Hash[String[1], Optional[Hash]] $packages,
   Gdm::CustomConf                 $settings,
-  Simplib::PackageEnsure          $package_ensure   = simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' }),
-  Boolean                         $include_sec      = true,
-  Boolean                         $auditd           = simplib::lookup('simp_options::auditd', { 'default_value' => false }),
-  Boolean                         $pam              = simplib::lookup('simp_options::pam', { 'default_value' => false }),
-  Boolean                         $banner           = true,
-  String[1]                       $simp_banner      = 'simp',
-  String[1]                       $display_mgr_user = 'gdm',
-  Optional[String[1]]             $banner_content   = undef
+  String[1]                       $dconf_db          = 'gdm',
+  String[1]                       $key_val_separator = ' = ',
+  Simplib::PackageEnsure          $package_ensure    = simplib::lookup('simp_options::package_ensure', { 'default_value' => 'installed' }),
+  Boolean                         $include_sec       = true,
+  Boolean                         $auditd            = simplib::lookup('simp_options::auditd', { 'default_value' => false }),
+  Boolean                         $pam               = simplib::lookup('simp_options::pam', { 'default_value' => false }),
+  Boolean                         $banner            = true,
+  String[1]                       $simp_banner       = 'simp',
+  String[1]                       $display_mgr_user  = 'gdm',
+  Optional[String[1]]             $banner_content    = undef
 ) {
   simplib::assert_metadata($module_name)
 

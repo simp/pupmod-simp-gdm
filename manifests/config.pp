@@ -7,9 +7,10 @@ class gdm::config {
   $gdm::settings.each |Gdm::ConfSection $section, NotUndef $section_settings| {
     $section_settings.each |String $key, $value| {
       gdm::set { "GDM [${section}] ${key}:${value}":
-        section => $section,
-        key     => $key,
-        value   => $value
+        section           => $section,
+        key               => $key,
+        value             => $value,
+        key_val_separator => $gdm::key_val_separator
       }
     }
   }
@@ -27,7 +28,7 @@ class gdm::config {
             'type'  => 'user',
             'order' => 1
           },
-          'gdm'                                   => {
+          $gdm::dconf_db                          => {
             'type' => 'system'
           },
           '/usr/share/gdm/greeter-dconf-defaults' => {
@@ -77,7 +78,7 @@ class gdm::config {
       }
 
       dconf::settings { 'GDM Dconf Settings':
-        profile       => 'gdm',
+        profile       => $gdm::dconf_db,
         settings_hash => deep_merge($_banner_settings, $gdm::dconf_hash)
       }
     }
