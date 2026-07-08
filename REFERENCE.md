@@ -37,7 +37,9 @@
 The following parameters are available in the `gdm` class:
 
 * [`dconf_hash`](#-gdm--dconf_hash)
+* [`dconf_db`](#-gdm--dconf_db)
 * [`packages`](#-gdm--packages)
+* [`key_val_separator`](#-gdm--key_val_separator)
 * [`settings`](#-gdm--settings)
 * [`package_ensure`](#-gdm--package_ensure)
 * [`include_sec`](#-gdm--include_sec)
@@ -54,6 +56,24 @@ Data type: `Dconf::SettingsHash`
 
 ``dconf`` settings applicable to GDM
 
+Default value: `{ 'org/gnome/login-screen' => { 'disable-restart-buttons' => { 'value' => true }, 'disable-user-list' => { 'value' => true } } }`
+
+##### <a name="-gdm--dconf_db"></a>`dconf_db`
+
+Data type: `String[1]`
+
+The ``dconf`` database (under ``/etc/dconf/db``) that this module's GDM
+settings are written to and that the GDM profile sources via a
+``system-db`` entry.
+
+* Defaults to ``gdm`` to preserve the module's historical behavior
+* Set to a database that common scanners inspect (such as ``local``,
+  ``site``, or ``distro``) when performing DISA STIG remediation. The GDM
+  profile is updated to include the selected database automatically so the
+  login screen continues to inherit these settings.
+
+Default value: `'gdm'`
+
 ##### <a name="-gdm--packages"></a>`packages`
 
 Data type: `Hash[String[1], Optional[Hash]]`
@@ -68,6 +88,22 @@ A Hash of packages to be installed
   { 'gdm' => { 'ensure' => '1.2.3' } }
 
 @see data/common.yaml
+
+Default value: `{ 'gdm' => undef, 'xorg-x11-fonts-100dpi' => undef, 'xorg-x11-fonts-75dpi' => undef, 'xorg-x11-fonts-ISO8859-1-100dpi' => undef, 'xorg-x11-fonts-ISO8859-1-75dpi' => undef, 'xorg-x11-fonts-Type1' => undef, 'xorg-x11-fonts-misc' => undef, 'xorg-x11-xinit' => undef, 'dejavu-sans-fonts' => undef, 'dejavu-sans-mono-fonts' => undef, 'dejavu-serif-fonts' => undef, 'liberation-mono-fonts' => undef, 'liberation-sans-fonts' => undef, 'liberation-serif-fonts' => undef }`
+
+##### <a name="-gdm--key_val_separator"></a>`key_val_separator`
+
+Data type: `String[1]`
+
+The character(s) placed between the key and value for settings written to
+`/etc/gdm/custom.conf`.
+
+* Defaults to ` = ` to preserve the historical output of the
+  `puppetlabs/inifile` module
+* Set to `=` (no surrounding whitespace) to satisfy strict scanner checks
+  such as the DISA STIG OVAL check for `AutomaticLoginEnable`
+
+Default value: `' = '`
 
 ##### <a name="-gdm--settings"></a>`settings`
 
@@ -88,6 +124,8 @@ validated
       'TimedLoginDelay' => 30
     }
   }
+
+Default value: `{ 'chooser' => { 'Multicast' => false }, 'daemon' => { 'TimedLoginEnable' => false, 'AutomaticLoginEnable' => false }, 'greeter' => { 'IncludeAll' => false }, 'security' => { 'DisallowTCP' => true }, 'xdmcp' => { 'Enable' => false } }`
 
 ##### <a name="-gdm--package_ensure"></a>`package_ensure`
 
@@ -210,6 +248,7 @@ The following parameters are available in the `gdm::set` defined type:
 * [`section`](#-gdm--set--section)
 * [`key`](#-gdm--set--key)
 * [`value`](#-gdm--set--value)
+* [`key_val_separator`](#-gdm--set--key_val_separator)
 
 ##### <a name="-gdm--set--section"></a>`section`
 
@@ -230,6 +269,18 @@ The actual key value that you wish to change under $section.
 Data type: `Variant[Boolean,String]`
 
 The value to which $key should be set under $section
+
+##### <a name="-gdm--set--key_val_separator"></a>`key_val_separator`
+
+Data type: `String[1]`
+
+The character(s) placed between the key and value in
+`/etc/gdm/custom.conf`.
+
+* Defaults to ` = `, matching the historical output of the
+  `puppetlabs/inifile` module
+
+Default value: `' = '`
 
 ## Data types
 

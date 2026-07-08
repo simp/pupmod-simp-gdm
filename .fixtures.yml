@@ -17,5 +17,3 @@ fixtures:
     # Fixtures needed for acceptance
     oddjob: https://github.com/simp/pupmod-simp-oddjob.git
     simp: https://github.com/simp/pupmod-simp-simp.git
-  symlinks:
-    gdm: "#{source_dir}"
