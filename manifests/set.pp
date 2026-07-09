@@ -33,7 +33,6 @@ define gdm::set (
   Variant[Boolean,String] $value,
   String[1]               $key_val_separator = ' = '
 ) {
-
   include 'gdm'
 
   ini_setting { "GDM custom config ${name}":

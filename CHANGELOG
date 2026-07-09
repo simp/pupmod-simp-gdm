@@ -1,3 +1,6 @@
+* Thu Jul 09 2026 Steven Pritchard <steve@sicura.us> - 8.1.1
+- Resolved puppet-lint manifest whitespace offenses
+
 * Wed Jul 01 2026 Mike Riddle <mike@sicura.us> - 8.1.0
 - Added the `gdm::dconf_db` parameter to make the `dconf` database that GDM
   settings are written to configurable. It defaults to `gdm` to preserve the

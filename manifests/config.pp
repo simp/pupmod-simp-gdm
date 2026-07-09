@@ -86,5 +86,4 @@ class gdm::config {
   else {
     notify { "Additional Puppet Run Needed for ${module_name}": }
   }
-
 }

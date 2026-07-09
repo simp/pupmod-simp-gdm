@@ -2,7 +2,6 @@
 #
 # @api private
 class gdm::install {
-
   assert_private()
 
   simplib::assert_metadata($module_name)
@@ -15,7 +14,6 @@ class gdm::install {
   }
 
   if $gdm::pam {
-
     simplib::assert_optional_dependency($module_name, 'simp/pam')
 
     pam::access::rule { 'allow_local_display_manager':
@@ -72,7 +70,4 @@ class gdm::install {
         }
       }
     }
-  }
-
-
-}
+} }
