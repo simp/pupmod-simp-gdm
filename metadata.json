@@ -1,6 +1,6 @@
 {
   "name": "simp-gdm",
-  "version": "8.1.1",
+  "version": "8.1.2",
   "author": "SIMP Team",
   "summary": "manages GDM",
   "license": "Apache-2.0",
@@ -20,11 +20,11 @@
     },
     {
       "name": "simp/dconf",
-      "version_requirement": ">= 0.0.1 < 2.0.0"
+      "version_requirement": ">= 0.0.1 < 3.0.0"
     },
     {
       "name": "simp/simplib",
-      "version_requirement": ">= 4.9.0 < 6.0.0"
+      "version_requirement": ">= 4.9.0 < 8.0.0"
     },
     {
       "name": "simp/tuned",
@@ -36,14 +36,14 @@
     },
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">= 8.0.0 < 10.0.0"
+      "version_requirement": ">= 8.0.0 < 11.0.0"
     }
   ],
   "simp": {
     "optional_dependencies": [
       {
         "name": "puppet/systemd",
-        "version_requirement": ">= 4.0.2 < 10.0.0"
+        "version_requirement": ">= 4.0.2 < 11.0.0"
       },
       {
         "name": "simp/pam",
