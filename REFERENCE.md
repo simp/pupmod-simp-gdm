@@ -302,4 +302,3 @@ Hash[Gdm::ConfSection, Hash[
     NotUndef
   ]]
 ```
-
