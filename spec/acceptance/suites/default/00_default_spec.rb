@@ -13,6 +13,12 @@ describe 'simp::gdm class' do
 
   hosts.each do |host|
     context "on #{host}" do
+      context 'in noop mode from a clean state' do
+        it 'previews without catalog failures' do
+          apply_manifest_on(host, manifest, catch_failures: true, noop: true)
+        end
+      end
+
       it 'enables epel' do
         enable_epel_on(host)
       end
