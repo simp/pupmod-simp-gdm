@@ -89,7 +89,7 @@ A Hash of packages to be installed
 
 @see data/common.yaml
 
-Default value: `{ 'gdm' => undef, 'xorg-x11-fonts-100dpi' => undef, 'xorg-x11-fonts-75dpi' => undef, 'xorg-x11-fonts-ISO8859-1-100dpi' => undef, 'xorg-x11-fonts-ISO8859-1-75dpi' => undef, 'xorg-x11-fonts-Type1' => undef, 'xorg-x11-fonts-misc' => undef, 'xorg-x11-xinit' => undef, 'dejavu-sans-fonts' => undef, 'dejavu-sans-mono-fonts' => undef, 'dejavu-serif-fonts' => undef, 'liberation-mono-fonts' => undef, 'liberation-sans-fonts' => undef, 'liberation-serif-fonts' => undef }`
+Default value: `{ 'gdm' => undef, 'xorg-x11-fonts-100dpi' => undef, 'xorg-x11-fonts-75dpi' => undef, 'xorg-x11-fonts-ISO8859-1-100dpi' => undef, 'xorg-x11-fonts-ISO8859-1-75dpi' => undef, 'xorg-x11-fonts-Type1' => undef, 'xorg-x11-fonts-misc' => undef, 'dejavu-sans-fonts' => undef, 'dejavu-sans-mono-fonts' => undef, 'dejavu-serif-fonts' => undef, 'liberation-mono-fonts' => undef, 'liberation-sans-fonts' => undef, 'liberation-serif-fonts' => undef }`
 
 ##### <a name="-gdm--key_val_separator"></a>`key_val_separator`
 
