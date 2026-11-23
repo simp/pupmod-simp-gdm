@@ -41,7 +41,7 @@ describe 'gdm' do
             removed_by_version = {
               9  => ['bitmap-fixed-fonts', 'bitmap-lucida-typewriter-fonts', 'xorg-x11-docs'],
               10 => ['bitmap-fixed-fonts', 'bitmap-lucida-typewriter-fonts', 'xorg-x11-docs',
-                     'xorg-x11-drivers', 'xorg-x11-server-Xorg', 'xorg-x11-utils'],
+                     'xorg-x11-drivers', 'xorg-x11-server-Xorg', 'xorg-x11-utils', 'xorg-x11-xinit'],
             }
             removed = removed_by_version.fetch(os_major, [])
 

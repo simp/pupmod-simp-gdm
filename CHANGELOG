@@ -1,3 +1,7 @@
+* Mon Nov 23 2026 Hazel Caballero <hazel@sicura.us> - 8.2.1
+- Fixed `include gdm` on EL10 without EPEL: `xorg-x11-xinit` is no longer in
+  the default package list there. EL8 and EL9 are unchanged
+
 * Thu Oct 08 2026 Steven Pritchard <steve@sicura.us> - 8.2.0
 - Add support for OpenVox 9
 - Update metadata.json dependency ranges from the Forge
