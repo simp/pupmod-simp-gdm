@@ -23,7 +23,6 @@ gdm::packages:
   xorg-x11-fonts-ISO8859-1-75dpi: ~
   xorg-x11-fonts-Type1: ~
   xorg-x11-fonts-misc: ~
-  xorg-x11-xinit: ~
   dejavu-sans-fonts: ~
   dejavu-sans-mono-fonts: ~
   dejavu-serif-fonts: ~
